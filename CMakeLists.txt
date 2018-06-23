@@ -24,7 +24,7 @@ if(PNG_FOUND AND GLEW_FOUND AND OPENGL_FOUND AND X11_FOUND AND FREETYPE_FOUND)
   target_link_libraries(example gui-mate
                         "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/libxoverlay.a"
                         "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/libglez.a"
-                         ${PNG_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_gl_LIBRARY} ${FREETYPE_LIBRARIES}
+                         ${PNG_LIBRARIES} GL GLU GLEW ${FREETYPE_LIBRARIES}
                          ${X11_X11_LIB} ${X11_Xext_LIB} ${X11_Xfixes_LIB})
 endif()
 # Wow ez
