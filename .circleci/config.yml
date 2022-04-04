@@ -11,9 +11,7 @@ jobs:
           command: "mkdir build"
       - run:
           name: "CMake build files"
-          command: 
-            cd build
-            cmake -DCMAKE_BUILD_TYPE=1 ..
+          command: "cd build && cmake -DCMAKE_BUILD_TYPE=1 ../"
 
 workflows:
   build-libpdraw-workflow:
