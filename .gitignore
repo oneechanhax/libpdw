@@ -1,9 +1,6 @@
-# Visual Studio 2015 cache/options directory
+# IDE
 .vs/
-# Visual Studio Code
 .vscode/
-
-# Visual C++ cache files
 ipch/
 *.aps
 *.ncb
@@ -13,11 +10,13 @@ ipch/
 *.cachefile
 *.VC.db
 
-# Cmake Build files
+# Build Files
 CMakeFiles/*
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+build/*
+compile_commands.json
 
 # Binaries
 libgui-mate.a

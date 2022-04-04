@@ -3,6 +3,10 @@
 cmake_minimum_required (VERSION 3.0.2)
 project (libpdraw VERSION 0.0.0 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS true)
+
 find_package(ImageMagick REQUIRED COMPONENTS convert identify )
 #if (NOT ImageMagick_idenity_FOUND)
     #message(FATAL "Please install imagemagick identify")
