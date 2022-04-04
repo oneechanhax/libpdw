@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: "Install development packages"
-          command: "apt update && apt install -y build-essential cmake"
+          command: "apt update && apt install -y build-essential cmake imagemagick"
       - run:
           name: "Make build directory"
           command: "mkdir build"
