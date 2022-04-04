@@ -4,6 +4,8 @@ jobs:
   build-libpdraw:
     docker:
       - image: ubuntu:focal
+    environment:
+      DEBIAN_FRONTEND: noninteractive
     steps:
       - checkout
       - run:
