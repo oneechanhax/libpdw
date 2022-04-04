@@ -1,2 +1,5 @@
 BasedOnStyle: WebKit
 BreakBeforeBraces: Attach
+CompactNamespaces: true
+FixNamespaceComments: true
+NamespaceIndentation: None

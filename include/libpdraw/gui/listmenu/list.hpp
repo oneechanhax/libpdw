@@ -26,6 +26,10 @@ namespace ncc {
         void Fill(const std::string vec);
         void Fill(const std::vector<ui::BaseVar*>& vec);
 
+        List* ForceGetSublist(std::string_view);
+        List* FindSublist(std::string_view);
+        List* CreateSublist(std::string_view);
+
         void OpenSublist(List* sublist, int dy);
         bool ShouldClose();
 
