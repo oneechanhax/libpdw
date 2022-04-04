@@ -10,17 +10,20 @@
 
 #include "item.hpp"
 
-namespace menu { namespace ncc {
+namespace menu {
+namespace ncc {
 
-class ItemTitle : public Item {
-public:
-	ItemTitle(std::string title);
+    class ItemTitle : public Item {
+    public:
+        ItemTitle(std::string title);
 
-	virtual void Draw(int x, int y) override;
-public:
-	const std::string title;
-};
+        virtual void Draw(int x, int y) override;
 
-}}
+    public:
+        const std::string title;
+    };
+
+}
+}
 
 #endif /* ITEMTITLE_HPP_ */

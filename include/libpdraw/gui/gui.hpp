@@ -9,19 +9,18 @@
 
 class IWidget;
 
-
 #include <string>
 
-#include "input.hpp"
 #include "canvas.hpp"
+#include "input.hpp"
 
 class CatGUI {
 public:
-	CatGUI();
-	~CatGUI();
+    CatGUI();
+    ~CatGUI();
 
-	void Setup();
-	Canvas* GetRootWindow();
-	Canvas* m_pRootWindow;
+    void Setup();
+    Canvas* GetRootWindow();
+    Canvas* m_pRootWindow;
 };
 extern CatGUI* g_pGUI;

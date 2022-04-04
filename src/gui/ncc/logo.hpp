@@ -15,11 +15,11 @@ namespace ncc {
 
 class Logo : public CBaseWidget {
 public:
-	Logo();
-	virtual bool AlwaysVisible() override;
-	virtual void Draw(int x, int y) override;
-	virtual void Update() override;
-	glez::texture texture;
+    Logo();
+    virtual bool AlwaysVisible() override;
+    virtual void Draw(int x, int y) override;
+    virtual void Update() override;
+    glez::texture texture;
 };
 
 }

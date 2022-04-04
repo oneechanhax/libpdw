@@ -13,10 +13,10 @@ class CMenuList;
 
 class CMenuListEntry : public CBaseButton {
 public:
-	CMenuListEntry(std::string name, CMenuList* parent, std::string entry);
+    CMenuListEntry(std::string name, CMenuList* parent, std::string entry);
 
-	bool IsSelected();
+    bool IsSelected();
 
-	virtual void SetMaxSize(int x, int y) override;
-	virtual void Draw(int x, int y) override;
+    virtual void SetMaxSize(int x, int y) override;
+    virtual void Draw(int x, int y) override;
 };

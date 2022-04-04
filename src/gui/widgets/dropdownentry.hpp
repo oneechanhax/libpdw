@@ -13,12 +13,10 @@
 
 class CDropdownEntry : public CBaseButton {
 public:
-	CDropdownEntry(std::string name = "unnamed", CDropdownList* parent = nullptr, std::string text = "unset", int value = 0);
-	~CDropdownEntry();
+    CDropdownEntry(std::string name = "unnamed", CDropdownList* parent = nullptr, std::string text = "unset", int value = 0);
+    ~CDropdownEntry();
 
-	virtual void Draw(int x, int y);
+    virtual void Draw(int x, int y);
 };
-
-
 
 #endif /* CDROPDOWNENTRY_H_ */

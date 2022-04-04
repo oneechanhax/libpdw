@@ -16,23 +16,23 @@ typedef std::function<void(CDropdown*, int)> DropdownCallbackFn_t;
 
 class CDropdown : public CBaseButton {
 public:
-	CDropdown(std::string name = "unnamed", IWidget* parent = nullptr);
-	~CDropdown();
+    CDropdown(std::string name = "unnamed", IWidget* parent = nullptr);
+    ~CDropdown();
 
-	void AddValue(std::string);
-	int ValueCount();
-	std::string ValueName(int idx);
-	void SetValue(int value);
-	void SetValueInternal(int value);
-	int  Value();
+    void AddValue(std::string);
+    int ValueCount();
+    std::string ValueName(int idx);
+    void SetValue(int value);
+    void SetValueInternal(int value);
+    int Value();
 
-	void ShowList();
-	void SetCallback(DropdownCallbackFn_t callback);
+    void ShowList();
+    void SetCallback(DropdownCallbackFn_t callback);
 
-	virtual void Draw(int x, int y);
-	virtual void OnFocusLose();
+    virtual void Draw(int x, int y);
+    virtual void OnFocusLose();
 
-	DropdownCallbackFn_t m_pDropdownCallback;
-	CDropdownList* list;
-	std::vector<std::string> m_values;
+    DropdownCallbackFn_t m_pDropdownCallback;
+    CDropdownList* list;
+    std::vector<std::string> m_values;
 };

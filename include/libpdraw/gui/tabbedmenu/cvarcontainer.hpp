@@ -15,14 +15,14 @@ class CTextLabel;
 
 class CCVarContainer : public CBaseContainer {
 public:
-	CCVarContainer(IWidget* parent, ui::BaseVar* var);
+    CCVarContainer(IWidget* parent, ui::BaseVar* var);
 
-	virtual void MoveChildren() override;
-	virtual void Update() override;
+    virtual void MoveChildren() override;
+    virtual void Update() override;
 
-	CTextInput* m_pInput;
-	IWidget* m_pControl;
-	CTextLabel* m_pLabel;
+    CTextInput* m_pInput;
+    IWidget* m_pControl;
+    CTextLabel* m_pLabel;
 
-	ui::BaseVar* m_pVar;
+    ui::BaseVar* m_pVar;
 };

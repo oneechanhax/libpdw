@@ -19,14 +19,14 @@ int size_table_width();
 
 class PlayerList : public CBaseContainer {
 public:
-	PlayerList();
+        PlayerList();
 
-	virtual void Draw(int x, int y) override;
-	virtual void Update() override;
-	virtual void OnKeyPress(CatKey key, bool repeat) override;
-	virtual void MoveChildren() override;
-	virtual bool IsVisible() override;
-	inline virtual void SortByZIndex() override {};
+        virtual void Draw(int x, int y) override;
+        virtual void Update() override;
+        virtual void OnKeyPress(CatKey key, bool repeat) override;
+        virtual void MoveChildren() override;
+        virtual bool IsVisible() override;
+        inline virtual void SortByZIndex() override {};
 };
 
 }}

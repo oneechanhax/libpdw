@@ -9,6 +9,7 @@ ipch/
 *.sdf
 *.cachefile
 *.VC.db
+.cache/*
 
 # Build Files
 CMakeFiles/*

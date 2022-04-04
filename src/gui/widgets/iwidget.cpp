@@ -7,4 +7,4 @@
 
 #include "gui/widgets/iwidget.hpp"
 
-IWidget::~IWidget() {}
+IWidget::~IWidget() { }

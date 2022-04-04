@@ -12,11 +12,9 @@
 
 class CSplitContainer : public CBaseContainer {
 public:
-	CSplitContainer(std::string name = "unnamed", IWidget* parent = nullptr);
+    CSplitContainer(std::string name = "unnamed", IWidget* parent = nullptr);
 
-	virtual void MoveChildren() override;
+    virtual void MoveChildren() override;
 };
-
-
 
 #endif /* CSPLITCONTAINER_H_ */
