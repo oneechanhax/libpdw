@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Install development packages"
+          command: "apt update && apt install build-essential"
+      - run:
           name: "Make build directory"
           command: "mkdir build"
       - run:
