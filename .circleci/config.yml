@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-libpdraw:
     docker:
-      - image: ubuntu:focal
+      - image: ubuntu:22.04 # LTS only
     environment:
       DEBIAN_FRONTEND: noninteractive
     steps:
