@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  build-libpdraw:
+    docker:
+      - image: ubuntu:focal
+    steps:
+      - checkout
+      - run:
+          name: "Make build directory"
+          command: "mkdir build"
+      - run:
+          name: "CMake build files"
+          command: 
+            cd build
+            cmake -DCMAKE_BUILD_TYPE=1 ..
+
+workflows:
+  build-libpdraw-workflow:
+    jobs:
+      - build-libpdraw
