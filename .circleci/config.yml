@@ -16,10 +16,10 @@ jobs:
           command: "mkdir build"
       - run:
           name: "CMake build files"
-          command: "cd build && cmake -DCMAKE_BUILD_TYPE=1 ../"
+          command: "cd build && cmake -DCMAKE_BUILD_TYPE=Release ../"
       - run:
           name: "Build Project"
-          command: "make"
+          command: "cd build && make"
 
 workflows:
   build-libpdraw-workflow:
