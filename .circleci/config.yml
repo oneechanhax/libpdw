@@ -7,7 +7,9 @@ jobs:
     environment:
       DEBIAN_FRONTEND: noninteractive
     steps:
-      - git clone -b v1.0.0 https://github.com/oneechanhax/libglez libglez
+      - run:
+          name: "Clone libglez"
+          command: "git clone -b v1.0.0 https://github.com/oneechanhax/libglez libglez"      
       - run:
           name: "Install development packages"
           command: "apt update && apt install -y build-essential cmake libz-dev libpng-dev libglew-dev libgl-dev libx11-dev libxext-dev libxfixes-dev libfreetype-dev libsdl2-dev"
@@ -29,7 +31,9 @@ jobs:
     environment:
       DEBIAN_FRONTEND: noninteractive
     steps:
-      - git clone -b v1.0.0 https://github.com/oneechanhax/libxoverlay libxoverlay
+      - run:
+          name: "Clone libxoverlay"
+          command: "git clone -b v1.0.0 https://github.com/oneechanhax/libxoverlay libxoverlay"      
       - run:
           name: "Install development packages"
           command: "apt update && apt install -y build-essential cmake libglew-dev libx11-dev libxext-dev libxfixes-dev"
