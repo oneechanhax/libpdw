@@ -28,6 +28,10 @@ jobs:
       - run:
           name: "Install libxoverlay"
           command: "cd libxoverlay/build && make install"
+      - run:
+          name: "Remove libxoverlay source"
+          command: "rm -rf libxoverlay/"
+
 
 
 
@@ -50,9 +54,12 @@ jobs:
       - run:
           name: "Install libglez"
           command: "cd libglez/build && make install"
+      - run:
+          name: "Remove libglez source"
+          command: "rm -rf libglez/"
 
 
-
+      
       - checkout
       - run:
           name: "Install libpdraw dependencies"
