@@ -1,42 +1,21 @@
 version: 2.1
 
 jobs:
-  build-libglez:
+  build-libpdraw:
     docker:
       - image: ubuntu:22.04 # LTS only
     environment:
       DEBIAN_FRONTEND: noninteractive
     steps:
       - run:
-          name: "Clone libglez"
-          command: "git clone -b v1.0.0 https://github.com/oneechanhax/libglez libglez"      
-      - run:
-          name: "Install development packages"
-          command: "apt update && apt install -y build-essential cmake libz-dev libpng-dev libglew-dev libgl-dev libx11-dev libxext-dev libxfixes-dev libfreetype-dev libsdl2-dev"
-      - run:
-          name: "Make build directory"
-          command: "mkdir libglez/build"
-      - run:
-          name: "CMake build files"
-          command: "cd libglez/build && cmake -DCMAKE_BUILD_TYPE=Release ../"
-      - run:
-          name: "Build libglez"
-          command: "cd libglez/build && make"
-      - run:
-          name: "Install libglez"
-          command: "cd libglez/build && make install"
-  build-libxoverlay:
-    docker:
-      - image: ubuntu:22.04 # LTS only
-    environment:
-      DEBIAN_FRONTEND: noninteractive
-    steps:
+          name: "Update apt and Install git"
+          command: "apt update && apt install -y git"
       - run:
           name: "Clone libxoverlay"
-          command: "git clone -b v1.0.0 https://github.com/oneechanhax/libxoverlay libxoverlay"      
+          command: "git clone -b v1.0.0 https://github.com/oneechanhax/libxoverlay libxoverlay"
       - run:
-          name: "Install development packages"
-          command: "apt update && apt install -y build-essential cmake libglew-dev libx11-dev libxext-dev libxfixes-dev"
+          name: "Install xlib development packages"
+          command: "apt install -y build-essential cmake libglew-dev libx11-dev libxext-dev libxfixes-dev"
       - run:
           name: "Make build directory"
           command: "mkdir libxoverlay/build"
@@ -49,16 +28,35 @@ jobs:
       - run:
           name: "Install libxoverlay"
           command: "cd libxoverlay/build && make install"
-  build-libpdraw:
-    docker:
-      - image: ubuntu:22.04 # LTS only
-    environment:
-      DEBIAN_FRONTEND: noninteractive
-    steps:
+
+
+
+
+      - run:
+          name: "Clone libglez"
+          command: "git clone -b v1.0.0 https://github.com/oneechanhax/libglez libglez"      
+      - run:
+          name: "Install libglez dependancies"
+          command: "apt install -y libz-dev libpng-dev libfreetype-dev libsdl2-dev"
+      - run:
+          name: "Make build directory"
+          command: "mkdir libglez/build"
+      - run:
+          name: "CMake build files"
+          command: "cd libglez/build && cmake -DCMAKE_BUILD_TYPE=Release ../"
+      - run:
+          name: "Build libglez"
+          command: "cd libglez/build && make"
+      - run:
+          name: "Install libglez"
+          command: "cd libglez/build && make install"
+
+
+
       - checkout
       - run:
-          name: "Install development packages"
-          command: "apt update && apt install -y build-essential cmake imagemagick libz-dev libpng-dev libglew-dev libgl-dev libx11-dev libxext-dev libxfixes-dev libfreetype-dev"
+          name: "Install libpdraw dependencies"
+          command: "apt install -y imagemagick "
       - run:
           name: "Make build directory"
           command: "mkdir build"
@@ -72,6 +70,4 @@ jobs:
 workflows:
   build-libpdraw-workflow:
     jobs:
-      - build-libglez
-      - build-libxoverlay
       - build-libpdraw
