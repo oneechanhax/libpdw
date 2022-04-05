@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: "Clone libglez"
-          command: "git clone -b v1.0.0 https://github.com/oneechanhax/libglez libglez"      
+          command: "git clone -b v1.0.1 https://github.com/oneechanhax/libglez libglez"      
       - run:
           name: "Install libglez dependancies"
           command: "apt install -y libz-dev libpng-dev libfreetype-dev libsdl2-dev"
