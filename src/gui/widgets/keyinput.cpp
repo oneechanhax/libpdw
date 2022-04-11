@@ -19,7 +19,7 @@
 
 #include <glez/draw.hpp>
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 
 #include "gui/widgets/keyinput.hpp"
 
@@ -43,7 +43,7 @@ void CKeyInput::Draw(int x, int y) {
     glez::rgba color = glez::color::white;
     if (this->capturing) {
         key = "< PRESS >";
-        color = g_pGUI->GetRootWindow()->GetColor();
+        color = this->GetCanvas()->GetColor();
     } else {
         if (!Value()) {
             if (!IsFocused()) {
@@ -55,8 +55,8 @@ void CKeyInput::Draw(int x, int y) {
     }
     auto size = GetSize();
     std::pair<float, float> ss;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(key, &ss.first, &ss.second);
-    glez::draw::string(x + (size.first - ss.first) / 2, y + (size.second - ss.second) / 2, key, g_pGUI->GetRootWindow()->GetFont(), color, nullptr, nullptr);
+    this->GetCanvas()->GetFont().stringSize(key, &ss.first, &ss.second);
+    glez::draw::string(x + (size.first - ss.first) / 2, y + (size.second - ss.second) / 2, key, this->GetCanvas()->GetFont(), color, nullptr, nullptr);
 }
 
 void CKeyInput::SetCallback(KeyInputCallbackFn_t callback) {

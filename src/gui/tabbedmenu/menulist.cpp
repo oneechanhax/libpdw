@@ -22,8 +22,6 @@
 #include "gui/tabbedmenu/menuwindow.hpp"
 #include "menulistentry.hpp"
 
-#include "gui/gui.hpp"
-
 CMenuList::CMenuList(std::string name, CMenuWindow* parent)
     : CBaseContainer(name, parent) {
 }

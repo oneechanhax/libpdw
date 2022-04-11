@@ -22,7 +22,7 @@
 #include "menulist.hpp"
 #include "menulistentry.hpp"
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 
 CMenuListEntry::CMenuListEntry(std::string name, CMenuList* parent, std::string entry)
     : CBaseButton(name, parent, entry) {
@@ -40,17 +40,17 @@ bool CMenuListEntry::IsSelected() {
 
 void CMenuListEntry::Draw(int x, int y) {
     std::pair<float, float> texts;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(GetText(), &texts.first, &texts.second);
+    this->GetCanvas()->GetFont().stringSize(GetText(), &texts.first, &texts.second);
     auto size = GetSize();
     if (IsSelected()) {
-        glez::draw::line(x, y, size.first, 0, g_pGUI->GetRootWindow()->GetColor(), 1);
-        glez::draw::line(x, y + size.second, size.first, 0, g_pGUI->GetRootWindow()->GetColor(), 1);
-        glez::draw::line(x, y, 0, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
+        glez::draw::line(x, y, size.first, 0, this->GetCanvas()->GetColor(), 1);
+        glez::draw::line(x, y + size.second, size.first, 0, this->GetCanvas()->GetColor(), 1);
+        glez::draw::line(x, y, 0, size.second, this->GetCanvas()->GetColor(), 1);
     } else {
-        glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
+        glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
     }
     if (IsHovered()) {
-        glez::draw::rect(x, y, size.first, size.second, Transparent(g_pGUI->GetRootWindow()->GetColor(), 0.25));
+        glez::draw::rect(x, y, size.first, size.second, Transparent(this->GetCanvas()->GetColor(), 0.25));
     }
-    glez::draw::string(x + (size.first - texts.first) / 2, y + (size.second - texts.second) / 2, GetText().c_str(), g_pGUI->GetRootWindow()->GetFont(), IsSelected() ? glez::color::white : g_pGUI->GetRootWindow()->GetColor(), nullptr, nullptr);
+    glez::draw::string(x + (size.first - texts.first) / 2, y + (size.second - texts.second) / 2, GetText().c_str(), this->GetCanvas()->GetFont(), IsSelected() ? glez::color::white : this->GetCanvas()->GetColor(), nullptr, nullptr);
 }

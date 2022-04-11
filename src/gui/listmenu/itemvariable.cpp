@@ -22,8 +22,9 @@
 #include <stdexcept>
 #include <var.hpp>
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 #include "gui/listmenu/item.hpp"
+
 #include "gui/listmenu/itemvariable.hpp"
 
 namespace menu {
@@ -136,7 +137,7 @@ void ItemVariable::Draw(int x, int y) {
         }
     } break;
     }
-    glez::draw::string(x + 2, y, (std::string(catvar.gui_name) + ": " + val), g_pGUI->GetRootWindow()->GetFont(), glez::color::white, nullptr, nullptr);
+    glez::draw::string(x + 2, y, (std::string(catvar.gui_name) + ": " + val), this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
 }
 
 }

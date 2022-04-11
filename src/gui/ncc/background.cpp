@@ -22,12 +22,12 @@
 #include <glez/color.hpp>
 #include <glez/draw.hpp>
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 #include "gui/widgets/basewidget.hpp"
 #include "input.hpp"
 #include "var.hpp"
 
-#include "background.hpp"
+#include "gui/ncc/background.hpp"
 
 namespace ncc {
 
@@ -52,6 +52,7 @@ Background::Background()
     tx_raindrop2 = glez::texture::loadFromMemory(embeded_raindrop2_png_rgba.data.begin, embeded_raindrop2_png_rgba.data.size, embeded_raindrop2_png_rgba.width, embeded_raindrop2_png_rgba.height);
     auto bounds = input::GetBounds();
     SetSize(bounds.first, bounds.second);
+    this->zindex = -999;
 }
 
 bool Background::AlwaysVisible() {

@@ -19,8 +19,6 @@
 
 #include <glez/draw.hpp>
 
-#include "gui/gui.hpp"
-
 #include "gui/canvas.hpp"
 #include "gui/widgets/dropdown.hpp"
 #include "gui/widgets/dropdownlist.hpp"
@@ -28,7 +26,7 @@
 CDropdown::CDropdown(std::string name, IWidget* parent)
     : CBaseButton(name, parent) {
     list = new CDropdownList(name + "_list", this);
-    g_pGUI->GetRootWindow()->AddChild(list);
+    this->GetCanvas()->AddChild(list);
     SetSize(80, 18);
     list->SetSize(80, 0);
     CBaseButton::SetCallback([this](CBaseButton*) -> void {
@@ -60,13 +58,13 @@ std::string CDropdown::ValueName(int idx) {
 void CDropdown::Draw(int x, int y) {
     auto size = GetSize();
     std::pair<float, float> ssize;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(ValueName(Value() - this->offset), &ssize.first, &ssize.second);
+    this->GetCanvas()->GetFont().stringSize(ValueName(Value() - this->offset), &ssize.first, &ssize.second);
     glez::draw::rect(x, y, size.first, size.second, Transparent(glez::color::black));
-    glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
-    glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, ValueName(Value() - this->offset), g_pGUI->GetRootWindow()->GetFont(), g_pGUI->GetRootWindow()->GetColor(), nullptr, nullptr);
+    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
+    glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, ValueName(Value() - this->offset), this->GetCanvas()->GetFont(), this->GetCanvas()->GetColor(), nullptr, nullptr);
     std::pair<float, float> asize;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(">", &asize.first, &asize.second);
-    glez::draw::string(x + size.first - asize.first - 2, y + (size.second - asize.second) / 2, ">", g_pGUI->GetRootWindow()->GetFont(), g_pGUI->GetRootWindow()->GetColor(), nullptr, nullptr);
+    this->GetCanvas()->GetFont().stringSize(">", &asize.first, &asize.second);
+    glez::draw::string(x + size.first - asize.first - 2, y + (size.second - asize.second) / 2, ">", this->GetCanvas()->GetFont(), this->GetCanvas()->GetColor(), nullptr, nullptr);
 }
 
 void CDropdown::OnFocusLose() {

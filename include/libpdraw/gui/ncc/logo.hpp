@@ -27,7 +27,7 @@ namespace ncc {
 
 class Logo : public CBaseWidget {
 public:
-    Logo();
+    Logo(IWidget*);
     virtual bool AlwaysVisible() override;
     virtual void Draw(int x, int y) override;
     virtual void Update() override;

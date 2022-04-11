@@ -23,7 +23,8 @@
 
 class CTextLabel : public CBaseWidget {
 public:
-    CTextLabel(std::string name = "unnamed", IWidget* parent = nullptr, std::string text = "", bool centered = false);
+    CTextLabel(std::string name, IWidget* parent, std::string text = "", bool centered = false);
+    CTextLabel(std::string name = "unnamed", bool centered = false);
 
     void SetText(std::string text);
     std::string GetText();

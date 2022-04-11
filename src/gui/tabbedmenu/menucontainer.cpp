@@ -7,11 +7,10 @@
 
 #include <glez/draw.hpp>
 
+#include "gui/canvas.hpp"
 #include "gui/tabbedmenu/menucontainer.hpp"
 #include "gui/tabbedmenu/menuwindow.hpp"
 #include "gui/widgets/basebutton.hpp"
-
-#include "gui/gui.hpp"
 
 CMenuContainer::CMenuContainer(std::string name, CMenuWindow* parent)
     : CBaseContainer(name, parent) { SetMaxSize(200, 200); }
@@ -40,6 +39,6 @@ void CMenuContainer::MoveChildren() {
 void CMenuContainer::Draw(int x, int y) {
     CBaseContainer::Draw(x, y);
     for (int i = 0; i < this->columns; i++) {
-        glez::draw::line(x + (350 + 3) * (i + 1), y, 0, GetMaxSize().second, g_pGUI->GetRootWindow()->GetColor(), 1);
+        glez::draw::line(x + (350 + 3) * (i + 1), y, 0, GetMaxSize().second, this->GetCanvas()->GetColor(), 1);
     }
 }

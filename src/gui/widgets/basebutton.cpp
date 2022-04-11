@@ -21,7 +21,7 @@
 
 #include "gui/widgets/basebutton.hpp"
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 
 CBaseButton::CBaseButton(std::string name, IWidget* parent, std::string text, ButtonCallbackFn_t callback)
     : CTextLabel(name, parent, text) {
@@ -36,14 +36,14 @@ void CBaseButton::SetCallback(ButtonCallbackFn_t callback) {
 }
 
 void CBaseButton::Draw(int x, int y) {
-    glez::rgba textcolor = g_pGUI->GetRootWindow()->GetColor();
+    glez::rgba textcolor = this->GetCanvas()->GetColor();
     auto size = GetSize();
     if (IsPressed()) {
-        glez::draw::rect(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor());
+        glez::draw::rect(x, y, size.first, size.second, this->GetCanvas()->GetColor());
         textcolor = glez::color::white;
     }
-    glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
-    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText().c_str(), g_pGUI->GetRootWindow()->GetFont(), textcolor, nullptr, nullptr);
+    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
+    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText().c_str(), this->GetCanvas()->GetFont(), textcolor, nullptr, nullptr);
 }
 
 void CBaseButton::OnMousePress() {

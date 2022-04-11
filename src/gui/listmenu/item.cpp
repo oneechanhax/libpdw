@@ -19,7 +19,6 @@
 
 #include "gui/listmenu/item.hpp"
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 #include <glez/color.hpp>
 #include <glez/draw.hpp>
 
@@ -41,7 +40,7 @@ void Item::Draw(int x, int y) {
     // draw::DrawRect(x, y, size.first, size.second, colors::red);
     glez::draw::rect(x, y, size.first, size.second, glez::rgba(0, 0, 0, 55));
     if (IsHovered()) {
-        glez::draw::rect(x, y, size.first, size.second, Transparent(g_pGUI->GetRootWindow()->GetColor(), 0.32f));
+        glez::draw::rect(x, y, size.first, size.second, Transparent(this->GetCanvas()->GetColor(), 0.32f));
     }
 }
 

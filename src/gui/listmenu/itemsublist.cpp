@@ -22,7 +22,6 @@
 #include <stdexcept>
 
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 #include "gui/listmenu/itemsublist.hpp"
 
 namespace menu {
@@ -67,8 +66,8 @@ void ItemSublist::Draw(int x, int y) {
         throw std::runtime_error("Sublist parent can't be casted to List!");
     const auto& size = GetSize();
     if (parent->open_sublist == list)
-        glez::draw::rect(x, y, size.first, size.second, Transparent(g_pGUI->GetRootWindow()->GetColor(), 0.5f));
-    glez::draw::string(x + 2, y, (IsHovered() ? "[-] " : "[+] ") + title, g_pGUI->GetRootWindow()->GetFont(), glez::color::white, nullptr, nullptr);
+        glez::draw::rect(x, y, size.first, size.second, Transparent(this->GetCanvas()->GetColor(), 0.5f));
+    glez::draw::string(x + 2, y, (IsHovered() ? "[-] " : "[+] ") + title, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
 }
 
 void ItemSublist::OnKeyPress(CatKey code, bool repeated) {

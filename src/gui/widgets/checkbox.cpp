@@ -19,7 +19,7 @@
 
 #include <glez/draw.hpp>
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 
 #include "gui/widgets/checkbox.hpp"
 
@@ -36,9 +36,9 @@ void CCheckbox::SetWidth(int _width) {
 
 void CCheckbox::Draw(int x, int y) {
     auto size = GetSize();
-    glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
+    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
     if (Value()) {
-        glez::draw::rect(x + 3, y + 3, size.first - 6, size.second - 6, g_pGUI->GetRootWindow()->GetColor());
+        glez::draw::rect(x + 3, y + 3, size.first - 6, size.second - 6, this->GetCanvas()->GetColor());
     }
 }
 

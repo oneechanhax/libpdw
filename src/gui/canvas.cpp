@@ -38,8 +38,6 @@
 
 #include "gui/widgets/titlebar.hpp"
 
-#include "gui/gui.hpp"
-
 ui::Var<bool> gui_draw_bounds({ "Gui", "Debug" }, "Draw Bounds", false);
 ui::Var<bool> gui_visible({ "Gui" }, "Visible", true);
 Canvas::Canvas()

@@ -21,7 +21,6 @@
 #include <glez/draw.hpp>
 
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 
 #include "gui/widgets/slider.hpp"
 
@@ -72,11 +71,11 @@ float CSlider::Value() {
 void CSlider::Update() {
     if (IsPressed()) {
         if (m_bDragInit) {
-            int delta = m_nLastX - g_pGUI->GetRootWindow()->m_iMouseX;
+            int delta = m_nLastX - this->GetCanvas()->m_iMouseX;
             if (delta) {
                 auto abs = AbsolutePosition();
                 auto size = GetSize();
-                int mv = g_pGUI->GetRootWindow()->m_iMouseX - abs.first;
+                int mv = this->GetCanvas()->m_iMouseX - abs.first;
                 if (mv < 0)
                     mv = 0;
                 if (mv > size.first)
@@ -85,7 +84,7 @@ void CSlider::Update() {
                 m_nSliderPos = mv;
             }
         }
-        m_nLastX = g_pGUI->GetRootWindow()->m_iMouseX;
+        m_nLastX = this->GetCanvas()->m_iMouseX;
         m_bDragInit = true;
     } else
         m_bDragInit = false;
@@ -94,11 +93,11 @@ void CSlider::Update() {
 void CSlider::Draw(int x, int y) {
     auto size = GetSize();
     glez::draw::rect(x, y, size.first, size.second, glez::color::black);
-    glez::draw::rect(x, y, m_nSliderPos, size.second, g_pGUI->GetRootWindow()->GetColor());
+    glez::draw::rect(x, y, m_nSliderPos, size.second, this->GetCanvas()->GetColor());
     char s[256];
     snprintf(s, sizeof(s), "%.2f", Value());
     std::string str(s);
     std::pair<float, float> sl;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(str, &sl.first, &sl.second);
-    glez::draw::string(x + (size.first - sl.first) / 2, y + (size.second - sl.second) / 2, str, g_pGUI->GetRootWindow()->GetFont(), glez::color::white, nullptr, nullptr);
+    this->GetCanvas()->GetFont().stringSize(str, &sl.first, &sl.second);
+    glez::draw::string(x + (size.first - sl.first) / 2, y + (size.second - sl.second) / 2, str, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
 }

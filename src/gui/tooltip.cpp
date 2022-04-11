@@ -21,7 +21,6 @@
 #include <glez/draw.hpp>
 
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 #include "gui/listmenu/item.hpp"
 #include "gui/widgets/textlabel.hpp"
 #include "tooltip.hpp"
@@ -55,7 +54,7 @@ void Tooltip::Draw(int x, int y) {
     const auto& size = GetSize();
     int originx = x;
     int originy = y;
-    auto root_size = g_pGUI->m_pRootWindow->GetSize();
+    auto root_size = this->GetCanvas()->GetSize();
     if (originx + size.first > root_size.first)
         originx -= size.first;
     if (originx + size.second > root_size.second)
@@ -63,8 +62,8 @@ void Tooltip::Draw(int x, int y) {
     static auto bgcolor = glez::rgba(0, 0, 0, 77); // colors::Create(70, 86, 47, 28);
     static auto fgcolor = glez::rgba(200, 200, 190, 255);
     glez::draw::rect(x, y, size.first, size.second, bgcolor);
-    glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
-    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText(), g_pGUI->GetRootWindow()->GetFont(), fgcolor, nullptr, nullptr);
+    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
+    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText(), this->GetCanvas()->GetFont(), fgcolor, nullptr, nullptr);
 }
 
 }

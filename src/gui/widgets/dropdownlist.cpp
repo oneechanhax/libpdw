@@ -23,7 +23,7 @@
 #include "gui/widgets/dropdownentry.hpp"
 #include "gui/widgets/dropdownlist.hpp"
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 
 CDropdownList::CDropdownList(std::string name, CDropdown* menu, int offset)
     : CBaseContainer(name, nullptr) {
@@ -55,7 +55,7 @@ void CDropdownList::SetValue(int value) {
 void CDropdownList::Draw(int x, int y) {
     auto size = GetSize();
     glez::draw::rect(x, y, size.first, size.second, Transparent(glez::color::black, 0.85));
-    glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
+    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
     CBaseContainer::Draw(x, y);
 }
 

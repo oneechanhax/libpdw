@@ -22,7 +22,6 @@
 #include <stdexcept>
 
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 #include "gui/listmenu/item.hpp"
 #include "gui/listmenu/itemsublist.hpp"
 #include "gui/listmenu/itemtitle.hpp"
@@ -233,9 +232,9 @@ void List::OnMouseLeave() {
 
 void List::Draw(int x, int y) {
     // const auto& size = GetSize();
-    glez::draw::rect_outline(x, y, 2 + Item::size_x, this->items * Item::size_y + 2, g_pGUI->GetRootWindow()->GetColor(), 1);
+    glez::draw::rect_outline(x, y, 2 + Item::size_x, this->items * Item::size_y + 2, this->GetCanvas()->GetColor(), 1);
     for (int i = 1; i < this->items; i++) {
-        glez::draw::line(x + 1, y + Item::size_y * i, Item::size_x, 0, g_pGUI->GetRootWindow()->GetColor(), 1);
+        glez::draw::line(x + 1, y + Item::size_y * i, Item::size_x, 0, this->GetCanvas()->GetColor(), 1);
     }
     // CBaseContainer::Draw(x, y);
     for (int i = 0; i < ChildCount(); i++) {
@@ -272,7 +271,7 @@ void List::Update() {
     CBaseContainer::Update();
     if (IsPressed() && root_list == this) {
         const auto& offset = root_list->GetOffset();
-        root_list->SetOffset(offset.first + g_pGUI->GetRootWindow()->mouse_dx, offset.second + g_pGUI->GetRootWindow()->mouse_dy);
+        root_list->SetOffset(offset.first + this->GetCanvas()->mouse_dx, offset.second + this->GetCanvas()->mouse_dy);
     }
 }
 

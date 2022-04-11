@@ -20,7 +20,6 @@
 #include <glez/draw.hpp>
 
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 
 #include "gui/widgets/textinput.hpp"
 
@@ -37,7 +36,7 @@ bool CTextInput::ConsumesKey(CatKey key) {
 
 void CTextInput::SetMaxWidth(int width) {
     std::pair<float, float> length;
-    g_pGUI->GetRootWindow()->GetFont().stringSize("W", &length.first, &length.second);
+    this->GetCanvas()->GetFont().stringSize("W", &length.first, &length.second);
     SetSize(length.first * width + 4, length.second + 4); // TODO PADDING
 }
 
@@ -54,30 +53,30 @@ void CTextInput::SetValue(std::string value) {
 
 void CTextInput::Draw(int x, int y) {
     std::pair<float, float> wsize;
-    g_pGUI->GetRootWindow()->GetFont().stringSize("W", &wsize.first, &wsize.second);
+    this->GetCanvas()->GetFont().stringSize("W", &wsize.first, &wsize.second);
     auto size = GetSize();
     auto color = glez::rgba(0, 0, 0, 80);
     if (IsFocused())
-        color = Transparent(g_pGUI->GetRootWindow()->GetColor(), 0.25);
+        color = Transparent(this->GetCanvas()->GetColor(), 0.25);
     glez::draw::rect(x, y, size.first, size.second, color);
-    glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
+    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
     int ml = 0;
     int md = 0;
     std::pair<float, float> dotssize; // TODO static?
-    g_pGUI->GetRootWindow()->GetFont().stringSize("...", &dotssize.first, &dotssize.second);
+    this->GetCanvas()->GetFont().stringSize("...", &dotssize.first, &dotssize.second);
     std::string value = Value();
     for (int i = 0; i < value.length(); i++) {
         std::pair<float, float> strsize;
-        g_pGUI->GetRootWindow()->GetFont().stringSize(value.substr(i), &strsize.first, &strsize.second);
+        this->GetCanvas()->GetFont().stringSize(value.substr(i), &strsize.first, &strsize.second);
         if (strsize.first + 10 + dotssize.first >= size.first)
             md = i;
         if (strsize.first + 8 > size.first)
             ml = i;
     }
     if (ml) {
-        glez::draw::string(x + 2, y + 2, "..." + value.substr(md), g_pGUI->GetRootWindow()->GetFont(), glez::color::white, nullptr, nullptr);
+        glez::draw::string(x + 2, y + 2, "..." + value.substr(md), this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
     } else {
-        glez::draw::string(x + 2, y + 2, value, g_pGUI->GetRootWindow()->GetFont(), glez::color::white, nullptr, nullptr); // TODO recalc on update
+        glez::draw::string(x + 2, y + 2, value, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr); // TODO recalc on update
     }
 }
 
@@ -101,7 +100,7 @@ void CTextInput::OnKeyPress(CatKey key, bool repeat) {
         return;
     } else {
         char ch = 0;
-        if (g_pGUI->GetRootWindow()->m_bPressedState[CatKey::CATKEY_LSHIFT] || g_pGUI->GetRootWindow()->m_bPressedState[CatKey::CATKEY_RSHIFT]) {
+        if (this->GetCanvas()->m_bPressedState[CatKey::CATKEY_LSHIFT] || this->GetCanvas()->m_bPressedState[CatKey::CATKEY_RSHIFT]) {
             ch = toupper(input::key_names[key][0]);
         } else {
             ch = input::key_names[key][0];

@@ -33,7 +33,7 @@ enum PositionMode {
 };
 
 class KeyValues;
-
+class Canvas;
 class IWidget {
 public:
     virtual ~IWidget();
@@ -86,4 +86,5 @@ public:
     virtual IWidget* GetParent() = 0;
     virtual void SetParent(IWidget*) = 0;
     virtual std::string GetName() = 0;
+    virtual Canvas* GetCanvas() = 0;
 };

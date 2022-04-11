@@ -19,7 +19,7 @@
 
 #include <glez/draw.hpp>
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 
 #include "dropdownentry.hpp"
 
@@ -36,9 +36,9 @@ CDropdownEntry::CDropdownEntry(std::string name, CDropdownList* parent, std::str
 
 void CDropdownEntry::Draw(int x, int y) {
     std::pair<float, float> ssize;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(GetText(), &ssize.first, &ssize.second);
+    this->GetCanvas()->GetFont().stringSize(GetText(), &ssize.first, &ssize.second);
     auto size = GetSize();
-    glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, GetText(), g_pGUI->GetRootWindow()->GetFont(), g_pGUI->GetRootWindow()->GetColor(), nullptr, nullptr);
+    glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, GetText(), this->GetCanvas()->GetFont(), this->GetCanvas()->GetColor(), nullptr, nullptr);
 }
 
 CDropdownEntry::~CDropdownEntry() {

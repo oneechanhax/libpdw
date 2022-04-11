@@ -17,12 +17,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <cassert>
 #include <glez/draw.hpp>
+#include <ostream>
 
 #include "gui/widgets/basewidget.hpp"
 
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 
 void CBaseWidget::DrawBounds(int x, int y) {
     if (!this->bounds_color)
@@ -33,15 +34,15 @@ void CBaseWidget::DrawBounds(int x, int y) {
 }
 
 bool CBaseWidget::IsHovered() {
-    return g_pGUI->GetRootWindow()->IsVisible() && this->hover;
+    return this->GetCanvas()->IsVisible() && this->hover;
 }
 
 bool CBaseWidget::IsFocused() {
-    return g_pGUI->GetRootWindow()->IsVisible() && this->focus;
+    return this->GetCanvas()->IsVisible() && this->focus;
 }
 
 bool CBaseWidget::IsPressed() {
-    return g_pGUI->GetRootWindow()->IsVisible() && this->press;
+    return this->GetCanvas()->IsVisible() && this->press;
 }
 
 CBaseWidget::CBaseWidget(std::string _name, IWidget* parent)
@@ -61,7 +62,7 @@ CBaseWidget::CBaseWidget(std::string _name, IWidget* parent)
 
 void CBaseWidget::Update() {
     if (IsHovered() && IsVisible() && !this->tooltip.empty()) {
-        g_pGUI->m_pRootWindow->ShowTooltip(tooltip);
+        this->GetCanvas()->ShowTooltip(tooltip);
     }
 }
 
@@ -75,4 +76,15 @@ std::pair<int, int> CBaseWidget::AbsolutePosition() {
         parent = parent->GetParent();
     }
     return result;
+}
+
+Canvas* CBaseWidget::GetCanvas() {
+    auto* parent = GetParent();
+    if (parent) {
+        if (auto* canvas = parent->GetCanvas())
+            return canvas;
+    }
+    auto* ret = dynamic_cast<Canvas*>(this);
+    assert(ret);
+    return ret;
 }

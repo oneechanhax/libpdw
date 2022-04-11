@@ -102,7 +102,7 @@ public:
     inline virtual IWidget* GetParent() { return m_pParent; }
     inline virtual void SetParent(IWidget* parent) { m_pParent = parent; }
     inline virtual std::string GetName() { return this->name; }
-
+    virtual Canvas* GetCanvas();
     std::pair<int, int> AbsolutePosition();
     inline void SetSize(int x, int y) {
         if (x >= 0)

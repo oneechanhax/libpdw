@@ -21,7 +21,7 @@
 #include <glez/draw.hpp>
 #include <glez/font.hpp>
 
-#include "gui/gui.hpp"
+#include "gui/canvas.hpp"
 #include "gui/listmenu/itemtitle.hpp"
 
 namespace menu {
@@ -39,8 +39,8 @@ void ItemTitle::Draw(int x, int y) {
     bool brackets3 = this->brackets;
     std::string str = (brackets3 ? ">>> " : ">> ") + title + (brackets3 ? " <<<" : " <<");
     std::pair<float, float> size;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(str, &size.first, &size.second);
-    glez::draw::string(x + ((Item::size_x - size.first) / 2), y, str, g_pGUI->GetRootWindow()->GetFont(), glez::color::white, nullptr, nullptr);
+    this->GetCanvas()->GetFont().stringSize(str, &size.first, &size.second);
+    glez::draw::string(x + ((Item::size_x - size.first) / 2), y, str, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
 }
 
 }

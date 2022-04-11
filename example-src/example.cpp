@@ -20,7 +20,6 @@
 #include <iostream>
 
 #include "lib/xoverlay.h"
-#include "libpdraw/gui/gui.hpp"
 #include <embed_resources.hpp>
 #include <glez/detail/render.hpp>
 #include <glez/draw.hpp>
@@ -48,14 +47,17 @@
 #include "libpdraw/gui/tabbedmenu/menucontainer.hpp"
 #include "libpdraw/gui/tabbedmenu/menuwindow.hpp"
 
+#include "libpdraw/gui/ncc/background.hpp"
+#include "libpdraw/gui/ncc/logo.hpp"
+
 #include "input.hpp"
 
 static ui::Var<int> text({ "nonya" }, "Editable Text", 1);
 
 class TestWindow : public CBaseWindow {
 public:
-    TestWindow()
-        : CBaseWindow("root_test", nullptr) {
+    TestWindow(IWidget* parent)
+        : CBaseWindow("root_test", parent) {
         this->always_visible = false;
         this->hover = false;
         SetMaxSize(1270, 1000);
@@ -100,7 +102,7 @@ public:
     virtual void Update() override {
         this->CBaseWindow::Update();
         if (this->button_clicked)
-            g_pGUI->GetRootWindow()->ShowTooltip("This is an example of a very long tooltip! You can click me again to hide me from view. Thanks for using libpdraw ;)");
+            this->GetCanvas()->ShowTooltip("This is an example of a very long tooltip! You can click me again to hide me from view. Thanks for using libpdraw ;)");
     }
     CTextInput* text_box = nullptr;
     bool button_clicked = false;
@@ -135,21 +137,22 @@ int main() {
 
     glez::init(xoverlay_library.width, xoverlay_library.height);
 
+    Canvas* canvas;
     {
         input::RefreshInput();
         xoverlay_draw_begin();
         glez::begin();
 
-        g_pGUI = new CatGUI();
-        g_pGUI->Setup();
+        canvas = new Canvas();
+        canvas->Setup();
 
         glez::end();
         xoverlay_draw_end();
     }
 
-    auto test_window = new TestWindow();
+    auto test_window = new TestWindow(canvas);
 
-    g_pGUI->m_pRootWindow->AddChild(test_window);
+    canvas->AddChild(test_window);
 
     using namespace menu::ncc;
     // auto* list_menu = List::FromString(menu_list);
@@ -163,9 +166,9 @@ int main() {
         find->brackets = true;
     list_menu->SetMaxSize(1000, 1000);
     list_menu->Show();
-    g_pGUI->m_pRootWindow->AddChild(list_menu);
+    canvas->AddChild(list_menu);
 
-    auto* tabbedmenu = new CMenuWindow("menu_window", g_pGUI->m_pRootWindow);
+    auto* tabbedmenu = new CMenuWindow("menu_window", canvas);
     tabbedmenu->SetMaxSize(912, 410);
 
     tabbedmenu->AddTab("aimbot", "Main");
@@ -177,7 +180,13 @@ int main() {
     tabbedmenu->AddTab("esp3", "Sub3");
 
     // tabbedmenu->SetOffset((draw::width - 912) / 2, (draw::height - 410) / 2);
-    g_pGUI->m_pRootWindow->AddChild(tabbedmenu);
+    canvas->AddChild(tabbedmenu);
+
+    auto* logo = new ncc::Logo(canvas);
+    logo->SetOffset(500, 25);
+    canvas->AddChild(logo);
+
+    canvas->AddChild(new ncc::Background());
 
     for (auto& i : ui::BaseVar::GetList())
         printf("ui::BaseVar: %s\n", i->command_name.c_str());
@@ -192,7 +201,7 @@ int main() {
             // glez::draw::rect(100, 300, 200, 100, glez::rgba(255, 0, 128));
             // auto mouse = input::GetMouse();
             // glez::draw::rect(mouse.first - 6, mouse.second - 6, 12, 12, glez::rgba(255, 0, 128));
-            g_pGUI->m_pRootWindow->Update();
+            canvas->Update();
             // glez::draw::rect_textured(50, 50, 100, 100, g_pGUI->m_pRootWindow->GetColor(), dispenser, 0, 10, 40, 94, 7);
             /*bool pressed = input::GetKey(CatKey::CATKEY_MOUSE_1);
             if (!click) {

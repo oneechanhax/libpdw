@@ -19,9 +19,8 @@
 
 #include <glez/draw.hpp>
 
+#include "gui/canvas.hpp"
 #include "gui/widgets/basewindow.hpp"
-
-#include "gui/gui.hpp"
 
 void CBaseWindow::MoveChildren() {
     int mx = 0, my = 2;
@@ -61,6 +60,6 @@ void CBaseWindow::Draw(int x, int y) {
     auto abs = AbsolutePosition();
     auto size = GetSize();
     glez::draw::rect(abs.first, abs.second, size.first, size.second, Transparent(glez::color::black, 0.9));
-    glez::draw::rect_outline(abs.first, abs.second, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
+    glez::draw::rect_outline(abs.first, abs.second, size.first, size.second, this->GetCanvas()->GetColor(), 1);
     CBaseContainer::Draw(x, y);
 }

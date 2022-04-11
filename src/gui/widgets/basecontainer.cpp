@@ -20,7 +20,6 @@
 #include "gui/widgets/basecontainer.hpp"
 
 #include "gui/canvas.hpp"
-#include "gui/gui.hpp"
 
 class IMemAlloc;
 IMemAlloc* g_pMemAlloc = 0;
@@ -82,7 +81,7 @@ void CBaseContainer::Draw(int x, int y) {
     for (auto child : m_children) {
         if (child->IsVisible()) {
             auto off = child->GetOffset();
-            if (AlwaysVisible() || g_pGUI->GetRootWindow()->IsVisible() || child->AlwaysVisible())
+            if (AlwaysVisible() || this->GetCanvas()->IsVisible() || child->AlwaysVisible())
                 child->Draw(x + off.first, y + off.second);
         }
     }
@@ -177,7 +176,7 @@ void CBaseContainer::OnMouseLeave() {
 void CBaseContainer::OnMousePress() {
     CBaseWidget::OnMousePress();
     auto abs = AbsolutePosition();
-    PressOn(ChildByPoint(g_pGUI->GetRootWindow()->m_iMouseX - abs.first, g_pGUI->GetRootWindow()->m_iMouseY - abs.second));
+    PressOn(ChildByPoint(this->GetCanvas()->m_iMouseX - abs.first, this->GetCanvas()->m_iMouseY - abs.second));
 }
 
 void CBaseContainer::OnMouseRelease() {
@@ -204,7 +203,7 @@ void CBaseContainer::SortByZIndex() {
 
 void CBaseContainer::UpdateHovers() {
     auto abs = AbsolutePosition();
-    auto hovered = ChildByPoint(g_pGUI->GetRootWindow()->m_iMouseX - abs.first, g_pGUI->GetRootWindow()->m_iMouseY - abs.second);
+    auto hovered = ChildByPoint(this->GetCanvas()->m_iMouseX - abs.first, this->GetCanvas()->m_iMouseY - abs.second);
     if (hovered != GetHoveredChild()) {
         HoverOn(hovered);
     }
@@ -215,7 +214,7 @@ void CBaseContainer::Update() {
     MoveChildren();
     UpdateHovers();
     for (auto child : m_children) {
-        if (AlwaysVisible() || g_pGUI->GetRootWindow()->IsVisible() || child->AlwaysVisible())
+        if (AlwaysVisible() || this->GetCanvas()->IsVisible() || child->AlwaysVisible())
             child->Update();
     }
     CBaseWidget::Update();
