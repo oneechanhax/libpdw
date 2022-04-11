@@ -43,4 +43,7 @@ public:
     int m_nLastX;
     bool m_bDragInit;
     int m_nSliderPos;
+
+private:
+    float value_min, value_max, value, step;
 };

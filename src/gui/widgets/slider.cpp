@@ -36,15 +36,15 @@ CSlider::CSlider(std::string name, IWidget* parent)
 }
 
 void CSlider::Setup(float min, float max) {
-    Props()->SetFloat("value_min", min);
-    Props()->SetFloat("value_max", max);
-    Props()->SetFloat("value", 0);
-    Props()->SetFloat("step", 0);
+    this->value_min = min;
+    this->value_max = max;
+    this->value = 0;
+    this->step = 0;
     SetValue((min + max) / 2.0f);
 }
 
-void CSlider::SetStep(float step) {
-    Props()->SetFloat("step", step);
+void CSlider::SetStep(float _step) {
+    this->step = _step;
 }
 
 void CSlider::SetCallback(SliderCallbackFn_t callback) {
@@ -53,20 +53,20 @@ void CSlider::SetCallback(SliderCallbackFn_t callback) {
 
 void CSlider::SetValue(float value) {
     float old = Value();
-    if (Props()->GetFloat("step")) {
-        value -= fmod(value, Props()->GetFloat("step"));
+    if (this->step) {
+        value -= fmod(value, this->step);
     }
-    Props()->SetFloat("value", value);
+    this->value = value;
     if (old != value) {
         if (m_pCallback) {
             m_pCallback(this, old, value);
         }
     }
-    m_nSliderPos = (GetSize().first) * (float)(value - Props()->GetFloat("value_min")) / (float)(Props()->GetFloat("value_max") - Props()->GetFloat("value_min"));
+    m_nSliderPos = (GetSize().first) * (float)(value - this->value_min) / (float)(this->value_max - this->value_min);
 }
 
 float CSlider::Value() {
-    return Props()->GetFloat("value");
+    return this->value;
 }
 
 void CSlider::Update() {
@@ -81,7 +81,7 @@ void CSlider::Update() {
                     mv = 0;
                 if (mv > size.first)
                     mv = size.first;
-                SetValue(((float)mv / (float)size.first) * (Props()->GetFloat("value_max") - Props()->GetFloat("value_min")) + Props()->GetFloat("value_min"));
+                SetValue(((float)mv / (float)size.first) * (this->value_max - this->value_min) + this->value_min);
                 m_nSliderPos = mv;
             }
         }
