@@ -64,7 +64,7 @@ void Tooltip::Draw(int x, int y) {
     static auto fgcolor = glez::rgba(200, 200, 190, 255);
     glez::draw::rect(x, y, size.first, size.second, bgcolor);
     glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
-    glez::draw::string(x + Props()->GetInt("padding_x"), y + Props()->GetInt("padding_y"), GetText(), g_pGUI->GetRootWindow()->GetFont(), fgcolor, nullptr, nullptr);
+    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText(), g_pGUI->GetRootWindow()->GetFont(), fgcolor, nullptr, nullptr);
 }
 
 }

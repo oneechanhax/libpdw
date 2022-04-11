@@ -233,8 +233,8 @@ void List::OnMouseLeave() {
 
 void List::Draw(int x, int y) {
     // const auto& size = GetSize();
-    glez::draw::rect_outline(x, y, 2 + Item::size_x, Props()->GetInt("items") * Item::size_y + 2, g_pGUI->GetRootWindow()->GetColor(), 1);
-    for (int i = 1; i < Props()->GetInt("items"); i++) {
+    glez::draw::rect_outline(x, y, 2 + Item::size_x, this->items * Item::size_y + 2, g_pGUI->GetRootWindow()->GetColor(), 1);
+    for (int i = 1; i < this->items; i++) {
         glez::draw::line(x + 1, y + Item::size_y * i, Item::size_x, 0, g_pGUI->GetRootWindow()->GetColor(), 1);
     }
     // CBaseContainer::Draw(x, y);
@@ -290,7 +290,7 @@ void List::MoveChildren() {
         accy += Item::size_y;
         j++;
     }
-    Props()->SetInt("items", j);
+    this->items = j;
     List* list = dynamic_cast<List*>(open_sublist);
     if (list) {
         const auto& size = list->GetSize();

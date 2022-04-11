@@ -23,14 +23,14 @@
 
 #include "dropdownentry.hpp"
 
-CDropdownEntry::CDropdownEntry(std::string name, CDropdownList* parent, std::string text, int value)
+CDropdownEntry::CDropdownEntry(std::string name, CDropdownList* parent, std::string text, int _value)
     : CBaseButton(name, parent, text) {
-    Props()->SetInt("value", value);
+    this->value = _value;
     SetCallback([this](CBaseButton*) -> void {
         CDropdownList* parent = dynamic_cast<CDropdownList*>(GetParent());
         if (!parent)
             return;
-        parent->SetValue(Props()->GetInt("value"));
+        parent->SetValue(this->value);
     });
 }
 

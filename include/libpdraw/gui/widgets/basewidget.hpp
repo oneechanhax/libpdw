@@ -96,8 +96,8 @@ public:
 
     inline virtual std::string GetTooltip() { return this->tooltip; }
 
-    inline virtual PositionMode GetPositionMode() { return (PositionMode)m_KeyValues->GetInt("positionmode"); }
-    inline virtual void SetPositionMode(PositionMode mode) { m_KeyValues->SetInt("positionmode", mode); };
+    inline virtual PositionMode GetPositionMode() { return this->positionmode; }
+    inline virtual void SetPositionMode(PositionMode mode) { this->positionmode = mode; };
 
     inline virtual IWidget* GetParent() { return m_pParent; }
     inline virtual void SetParent(IWidget* parent) { m_pParent = parent; }
@@ -120,6 +120,7 @@ public:
     std::string tooltip;
     std::optional<glez::rgba> bounds_color;
     int zindex;
+    PositionMode positionmode;
     bool visible;
     bool always_visible;
 

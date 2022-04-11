@@ -83,14 +83,12 @@ void CTextLabel::SetCentered(bool _centered) {
 }
 
 void CTextLabel::SetPadding(int x, int y) {
-    Props()->SetInt("padding_x", x);
-    Props()->SetInt("padding_y", y);
+    this->padding = { x, y };
 }
 
 void CTextLabel::SetText(std::string text) {
     // unsigned long font_handle = Props()->GetInt("font", fonts::MENU);
     Props()->SetString("text", text.c_str());
-    auto padding = std::make_pair(Props()->GetInt("padding_x"), Props()->GetInt("padding_y"));
     std::pair<float, float> size;
     g_pGUI->GetRootWindow()->GetFont().stringSize(text, &size.first, &size.second);
     if (this->autosize) {

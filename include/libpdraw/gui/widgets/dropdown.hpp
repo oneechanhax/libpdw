@@ -47,4 +47,6 @@ public:
     DropdownCallbackFn_t m_pDropdownCallback;
     CDropdownList* list;
     std::vector<std::string> m_values;
+    int value;
+    int offset;
 };

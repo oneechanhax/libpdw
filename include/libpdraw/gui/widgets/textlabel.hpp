@@ -36,4 +36,5 @@ public:
 private:
     bool autosize;
     bool centered;
+    std::pair<int, int> padding;
 };

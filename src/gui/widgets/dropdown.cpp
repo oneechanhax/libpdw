@@ -34,8 +34,8 @@ CDropdown::CDropdown(std::string name, IWidget* parent)
     CBaseButton::SetCallback([this](CBaseButton*) -> void {
         ShowList();
     });
-    this->Props()->SetInt("value", 0);
-    this->Props()->SetInt("offset", 0);
+    this->value = 0;
+    this->offset = 0;
 }
 
 CDropdown::~CDropdown() {
@@ -60,10 +60,10 @@ std::string CDropdown::ValueName(int idx) {
 void CDropdown::Draw(int x, int y) {
     auto size = GetSize();
     std::pair<float, float> ssize;
-    g_pGUI->GetRootWindow()->GetFont().stringSize(ValueName(Value() - Props()->GetInt("offset")), &ssize.first, &ssize.second);
+    g_pGUI->GetRootWindow()->GetFont().stringSize(ValueName(Value() - this->offset), &ssize.first, &ssize.second);
     glez::draw::rect(x, y, size.first, size.second, Transparent(glez::color::black));
     glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
-    glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, ValueName(Value() - Props()->GetInt("offset")), g_pGUI->GetRootWindow()->GetFont(), g_pGUI->GetRootWindow()->GetColor(), nullptr, nullptr);
+    glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, ValueName(Value() - this->offset), g_pGUI->GetRootWindow()->GetFont(), g_pGUI->GetRootWindow()->GetColor(), nullptr, nullptr);
     std::pair<float, float> asize;
     g_pGUI->GetRootWindow()->GetFont().stringSize(">", &asize.first, &asize.second);
     glez::draw::string(x + size.first - asize.first - 2, y + (size.second - asize.second) / 2, ">", g_pGUI->GetRootWindow()->GetFont(), g_pGUI->GetRootWindow()->GetColor(), nullptr, nullptr);
@@ -74,13 +74,13 @@ void CDropdown::OnFocusLose() {
 }
 
 void CDropdown::SetValueInternal(int value) {
-    Props()->SetInt("value", value + Props()->GetInt("offset"));
+    this->value = value + this->offset;
     if (m_pDropdownCallback)
-        m_pDropdownCallback(this, value + Props()->GetInt("offset"));
+        m_pDropdownCallback(this, value + this->offset);
 }
 
 void CDropdown::SetValue(int value) {
-    Props()->SetInt("value", value);
+    this->value = value;
 }
 
 void CDropdown::ShowList() {
@@ -91,7 +91,7 @@ void CDropdown::ShowList() {
 }
 
 int CDropdown::Value() {
-    return Props()->GetInt("value");
+    return this->value;
 }
 
 int CDropdown::ValueCount() {

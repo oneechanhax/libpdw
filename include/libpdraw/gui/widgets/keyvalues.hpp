@@ -35,8 +35,8 @@ public:
     std::unordered_map<std::string, glez::rgba> stored_colors;
     [[deprecated]] bool GetBool(const std::string& s) { return this->stored_bools.at(s); }
     [[deprecated]] void SetBool(const std::string& s, int v) { this->stored_bools[s] = v; }
-    int GetInt(const std::string& s) { return this->stored_ints.at(s); }
-    void SetInt(const std::string& s, int v) { this->stored_ints[s] = v; }
+    [[deprecated]] int GetInt(const std::string& s) { return this->stored_ints.at(s); }
+    [[deprecated]] void SetInt(const std::string& s, int v) { this->stored_ints[s] = v; }
     float GetFloat(const std::string& s) { return this->stored_floats.at(s); }
     void SetFloat(const std::string& s, float v) { this->stored_floats[s] = v; }
     std::string GetString(const std::string& s) { return this->stored_strings.at(s); }

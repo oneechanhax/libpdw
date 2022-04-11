@@ -64,6 +64,9 @@ public:
     bool got_mouse { false };
     List* open_sublist { nullptr };
     std::string title;
+
+private:
+    int items;
 };
 
 }

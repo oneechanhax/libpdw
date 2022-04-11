@@ -25,17 +25,17 @@
 
 CKeyInput::CKeyInput(std::string name, IWidget* parent)
     : CBaseWidget(name, parent) {
-    Props()->SetInt("value", 0);
+    this->value = 0;
     this->capturing = false;
     this->focus = false;
 }
 
 CatKey CKeyInput::Value() {
-    return (CatKey)Props()->GetInt("value");
+    return (CatKey)this->value;
 }
 
 void CKeyInput::SetValue(int value) {
-    Props()->SetInt("value", value);
+    this->value = value;
 }
 
 void CKeyInput::Draw(int x, int y) {

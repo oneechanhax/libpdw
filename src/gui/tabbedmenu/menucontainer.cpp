@@ -34,12 +34,12 @@ void CMenuContainer::MoveChildren() {
         c->SetMaxSize(column_size, -1);
         y += c->GetSize().second + 2;
     }
-    Props()->SetInt("columns", columns);
+    this->columns = columns;
 }
 
 void CMenuContainer::Draw(int x, int y) {
     CBaseContainer::Draw(x, y);
-    for (int i = 0; i < Props()->GetInt("columns"); i++) {
+    for (int i = 0; i < this->columns; i++) {
         glez::draw::line(x + (350 + 3) * (i + 1), y, 0, GetMaxSize().second, g_pGUI->GetRootWindow()->GetColor(), 1);
     }
 }

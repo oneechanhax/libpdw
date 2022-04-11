@@ -43,7 +43,7 @@ void CBaseButton::Draw(int x, int y) {
         textcolor = glez::color::white;
     }
     glez::draw::rect_outline(x, y, size.first, size.second, g_pGUI->GetRootWindow()->GetColor(), 1);
-    glez::draw::string(x + Props()->GetInt("padding_x"), y + Props()->GetInt("padding_y"), GetText().c_str(), g_pGUI->GetRootWindow()->GetFont(), textcolor, nullptr, nullptr);
+    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText().c_str(), g_pGUI->GetRootWindow()->GetFont(), textcolor, nullptr, nullptr);
 }
 
 void CBaseButton::OnMousePress() {

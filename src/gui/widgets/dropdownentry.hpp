@@ -29,6 +29,7 @@ public:
     ~CDropdownEntry();
 
     virtual void Draw(int x, int y);
+    int value;
 };
 
 #endif /* CDROPDOWNENTRY_H_ */

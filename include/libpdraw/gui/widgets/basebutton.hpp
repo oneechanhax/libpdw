@@ -40,4 +40,5 @@ public:
     void SetCallback(ButtonCallbackFn_t callback);
 
     ButtonCallbackFn_t m_pCallback;
+    std::pair<int, int> padding;
 };

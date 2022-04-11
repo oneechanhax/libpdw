@@ -41,4 +41,5 @@ public:
     virtual void OnFocusLose() override;
     virtual bool ConsumesKey(CatKey key) override;
     bool capturing;
+    int value;
 };

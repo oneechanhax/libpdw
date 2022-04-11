@@ -54,7 +54,7 @@ CCVarContainer::CCVarContainer(IWidget* parent, ui::BaseVar* var)
         dd->SetCallback([this](CDropdown*, int value) {
             *static_cast<ui::Var<ui::Enum>*>(m_pVar) = value;
         });
-        dd->Props()->SetInt("offset", 0 /*var->enum_type->Minimum()*/);
+        dd->offset = 0 /*var->enum_type->Minimum()*/;
         m_pControl = dd;
     } break;
     case ui::BaseVar::Type::kFloat: {

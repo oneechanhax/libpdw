@@ -30,4 +30,5 @@ public:
     virtual inline void SortByZIndex() override {};
     virtual void MoveChildren() override;
     virtual void Draw(int x, int y) override;
+    int columns;
 };
