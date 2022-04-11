@@ -30,12 +30,14 @@ public:
     CCheckbox(std::string name = "unnamed", IWidget* parent = nullptr, bool checked = false);
 
     void SetWidth(int width);
-    inline bool Value() { return Props()->GetBool("checked"); }
-    inline void SetValue(bool value) { Props()->SetBool("checked", value); }
+    inline bool Value() { return this->checked; }
+    inline void SetValue(bool value) { this->checked = value; }
     void SetCallback(CheckboxCallbackFn_t callback);
 
     virtual void OnMousePress();
     virtual void Draw(int x, int y);
 
     CheckboxCallbackFn_t m_pCallback;
+    bool checked;
+    int width;
 };

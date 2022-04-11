@@ -33,6 +33,7 @@ public:
 
 public:
     const std::string title;
+    bool brackets;
 };
 
 }

@@ -62,7 +62,7 @@ static std::string WordWrap(std::string& in, int max, glez::font& font) {
 
 CTextLabel::CTextLabel(std::string name, IWidget* parent, std::string text, bool centered)
     : CBaseWidget(name, parent) {
-    Props()->SetInt("max_x", 50);
+    this->max_size.first = 50;
     this->SetPadding(3, 3);
     if (centered) {
         SetAutoSize(false);
@@ -74,12 +74,12 @@ CTextLabel::CTextLabel(std::string name, IWidget* parent, std::string text, bool
     SetText(text);
 }
 
-void CTextLabel::SetAutoSize(bool autosize) {
-    Props()->SetBool("autosize", autosize);
+void CTextLabel::SetAutoSize(bool _autosize) {
+    this->autosize = _autosize;
 }
 
-void CTextLabel::SetCentered(bool centered) {
-    Props()->SetBool("centered", centered);
+void CTextLabel::SetCentered(bool _centered) {
+    this->centered = _centered;
 }
 
 void CTextLabel::SetPadding(int x, int y) {
@@ -93,11 +93,11 @@ void CTextLabel::SetText(std::string text) {
     auto padding = std::make_pair(Props()->GetInt("padding_x"), Props()->GetInt("padding_y"));
     std::pair<float, float> size;
     g_pGUI->GetRootWindow()->GetFont().stringSize(text, &size.first, &size.second);
-    if (Props()->GetBool("autosize")) {
+    if (this->autosize) {
         SetSize(size.first + padding.first * 2, size.second + padding.second * 2);
     } else {
         // auto ms = GetMaxSize();
-        auto ms = Props()->GetInt("max_x");
+        auto ms = this->max_size.first;
         SetSize(-1, size.second + padding.second * 2);
         if (ms /*.first*/ > 0) {
             std::string txt = WordWrap(text, ms /*.first*/ - 2 * padding.first, g_pGUI->GetRootWindow()->GetFont());
@@ -115,7 +115,7 @@ std::string CTextLabel::GetText() {
 }
 
 void CTextLabel::Draw(int x, int y) {
-    if (Props()->GetBool("centered")) {
+    if (this->centered) {
         auto size = GetSize();
         std::pair<float, float> ssize;
         g_pGUI->GetRootWindow()->GetFont().stringSize(GetText(), &ssize.first, &ssize.second);

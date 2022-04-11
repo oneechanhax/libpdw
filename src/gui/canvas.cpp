@@ -48,11 +48,11 @@ Canvas::Canvas()
 // Crashes associated with no set root in globals
 void Canvas::Setup() {
     gui_visible.Callback = [this](bool v) {
-        this->Props()->SetBool("visible", v);
+        this->visible = v;
     };
     this->gui_color = glez::rgba(255, 105, 180);
-    this->Props()->SetBool("always_visible", true);
-    this->Props()->SetBool("hover", true);
+    this->always_visible = true;
+    this->hover = true;
 
     // this->font = new glez::font("../res/opensans.ttf", 10);
     // this->font->load();
@@ -121,7 +121,7 @@ void Canvas::Update() {
                     }
                 } else {
                     if ((i == CatKey::CATKEY_INSERT || i == CatKey::CATKEY_F11) && down) {
-                        this->Props()->SetBool("visible", !this->Props()->GetBool("visible"));
+                        this->visible = !this->visible;
                     }
                     if (this->IsVisible()) {
                         if (down)

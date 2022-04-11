@@ -27,7 +27,7 @@
 CTextInput::CTextInput(std::string name, IWidget* parent)
     : CBaseWidget(name, parent) {
     this->Props()->SetString("value", "");
-    this->Props()->SetBool("focus", false);
+    this->focus = false;
     this->SetMaxWidth(8);
 }
 

@@ -26,8 +26,8 @@
 CKeyInput::CKeyInput(std::string name, IWidget* parent)
     : CBaseWidget(name, parent) {
     Props()->SetInt("value", 0);
-    Props()->SetBool("capturing", false);
-    Props()->SetBool("focus", false);
+    this->capturing = false;
+    this->focus = false;
 }
 
 CatKey CKeyInput::Value() {
@@ -41,7 +41,7 @@ void CKeyInput::SetValue(int value) {
 void CKeyInput::Draw(int x, int y) {
     std::string key = "";
     glez::rgba color = glez::color::white;
-    if (Props()->GetBool("capturing")) {
+    if (this->capturing) {
         key = "< PRESS >";
         color = g_pGUI->GetRootWindow()->GetColor();
     } else {
@@ -64,25 +64,25 @@ void CKeyInput::SetCallback(KeyInputCallbackFn_t callback) {
 }
 
 void CKeyInput::OnMousePress() {
-    if (!Props()->GetBool("capturing"))
-        Props()->SetBool("capturing", true);
+    if (!this->capturing)
+        this->capturing = true;
 }
 
 void CKeyInput::OnFocusLose() {
-    Props()->SetBool("capturing", false);
+    this->capturing = false;
 }
 
 bool CKeyInput::ConsumesKey(CatKey key) {
-    return key != CatKey::CATKEY_MOUSE_1 && Props()->GetBool("capturing");
+    return key != CatKey::CATKEY_MOUSE_1 && this->capturing;
 }
 
 void CKeyInput::OnKeyPress(CatKey key, bool repeat) {
-    if (Props()->GetBool("capturing")) {
+    if (this->capturing) {
         if (key == CATKEY_ESCAPE)
             key = (CatKey)0;
         SetValue(key);
         if (m_pCallback)
             m_pCallback(this, key);
-        Props()->SetBool("capturing", false);
+        this->capturing = false;
     }
 }

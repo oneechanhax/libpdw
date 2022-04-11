@@ -56,14 +56,14 @@ class TestWindow : public CBaseWindow {
 public:
     TestWindow()
         : CBaseWindow("root_test", nullptr) {
-        Props()->SetBool("always_visible", false);
-        Props()->SetBool("hover", false);
+        this->always_visible = false;
+        this->hover = false;
         SetMaxSize(1270, 1000);
         SetPositionMode(PositionMode::FLOATING);
 
         auto* titlebar = new CTitleBar(this, "Test uwu~");
         AddChild(titlebar);
-        Props()->SetBool("visable", true);
+        // this->visible = true;
 
         AddChild(new CTextLabel("button_label", this, "Button widget:"));
         AddChild(new CBaseButton("button", this, "I'm Clickable!", [this](CBaseButton*) {
@@ -155,7 +155,12 @@ int main() {
     // auto* list_menu = List::FromString(menu_list);
     auto* list_menu = new List();
     list_menu->Fill(ui::BaseVar::GetList());
-    list_menu->Props()->SetBool("brackets3", true);
+    ItemTitle* find = nullptr;
+    for (auto* i : list_menu->m_children)
+        if ((find = dynamic_cast<ItemTitle*>(i)))
+            break;
+    if (find)
+        find->brackets = true;
     list_menu->SetMaxSize(1000, 1000);
     list_menu->Show();
     g_pGUI->m_pRootWindow->AddChild(list_menu);

@@ -33,8 +33,8 @@ public:
     std::unordered_map<std::string, float> stored_floats;
     std::unordered_map<std::string, std::string> stored_strings;
     std::unordered_map<std::string, glez::rgba> stored_colors;
-    bool GetBool(const std::string& s) { return this->stored_bools.at(s); }
-    void SetBool(const std::string& s, int v) { this->stored_bools[s] = v; }
+    [[deprecated]] bool GetBool(const std::string& s) { return this->stored_bools.at(s); }
+    [[deprecated]] void SetBool(const std::string& s, int v) { this->stored_bools[s] = v; }
     int GetInt(const std::string& s) { return this->stored_ints.at(s); }
     void SetInt(const std::string& s, int v) { this->stored_ints[s] = v; }
     float GetFloat(const std::string& s) { return this->stored_floats.at(s); }

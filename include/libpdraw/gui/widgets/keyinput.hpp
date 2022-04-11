@@ -40,4 +40,5 @@ public:
     virtual void OnMousePress() override;
     virtual void OnFocusLose() override;
     virtual bool ConsumesKey(CatKey key) override;
+    bool capturing;
 };

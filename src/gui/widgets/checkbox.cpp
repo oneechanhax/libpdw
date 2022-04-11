@@ -29,9 +29,9 @@ CCheckbox::CCheckbox(std::string name, IWidget* parent, bool checked)
     SetValue(checked);
 }
 
-void CCheckbox::SetWidth(int width) {
-    Props()->SetInt("width", width);
-    SetSize(width, width);
+void CCheckbox::SetWidth(int _width) {
+    this->width = _width;
+    SetSize(_width, _width);
 }
 
 void CCheckbox::Draw(int x, int y) {

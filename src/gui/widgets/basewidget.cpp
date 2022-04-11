@@ -25,46 +25,43 @@
 #include "gui/gui.hpp"
 
 void CBaseWidget::DrawBounds(int x, int y) {
-    if (m_KeyValues->IsEmpty("bounds_color")) {
-        m_KeyValues->SetColor("bounds_color", glez::rgba(rand() % 255, rand() % 255, rand() % 255, 255));
-    }
+    if (!this->bounds_color)
+        this->bounds_color = glez::rgba(rand() % 255, rand() % 255, rand() % 255, 255);
     auto size = GetSize();
-    glez::draw::rect(x, y, size.first, size.second, Transparent(m_KeyValues->GetColor("bounds_color"), 0.25f));
-    glez::draw::rect_outline(x, y, size.first, size.second, m_KeyValues->GetColor("bounds_color"), 1);
+    glez::draw::rect(x, y, size.first, size.second, Transparent(*this->bounds_color, 0.25f));
+    glez::draw::rect_outline(x, y, size.first, size.second, *this->bounds_color, 1);
 }
 
 bool CBaseWidget::IsHovered() {
-    return g_pGUI->GetRootWindow()->IsVisible() && m_KeyValues->GetBool("hover");
+    return g_pGUI->GetRootWindow()->IsVisible() && this->hover;
 }
 
 bool CBaseWidget::IsFocused() {
-    return g_pGUI->GetRootWindow()->IsVisible() && m_KeyValues->GetBool("focus");
+    return g_pGUI->GetRootWindow()->IsVisible() && this->focus;
 }
 
 bool CBaseWidget::IsPressed() {
-    return g_pGUI->GetRootWindow()->IsVisible() && m_KeyValues->GetBool("press");
+    return g_pGUI->GetRootWindow()->IsVisible() && this->press;
 }
 
-CBaseWidget::CBaseWidget(std::string name, IWidget* parent)
-    : m_KeyValues(new KeyValues(std::string(name + "_kv").c_str())) {
+CBaseWidget::CBaseWidget(std::string _name, IWidget* parent)
+    : m_KeyValues(new KeyValues(std::string(_name + "_kv").c_str())) {
     m_pParent = parent;
-    Props()->SetString("name", name.c_str());
+    this->name = _name;
     SetPositionMode(INLINE);
     Show();
-    SetMaxSize(-1, -1);
+    this->max_size = { -1, -1 };
     this->SetOffset(0, 0);
-    this->Props()->SetBool("hover", false);
-    this->Props()->SetBool("press", false);
-    this->Props()->SetBool("focus", false);
-    this->Props()->SetBool("always_visible", false);
-    this->Props()->SetInt("size_y", 0);
-    this->Props()->SetInt("size_x", 0);
+    this->hover = false;
+    this->press = false;
+    this->focus = false;
+    this->always_visible = false;
     this->SetZIndex(-1);
 }
 
 void CBaseWidget::Update() {
-    if (IsHovered() && IsVisible() && Props()->FindKey("tooltip")) {
-        g_pGUI->m_pRootWindow->ShowTooltip(Props()->GetString("tooltip"));
+    if (IsHovered() && IsVisible() && !this->tooltip.empty()) {
+        g_pGUI->m_pRootWindow->ShowTooltip(tooltip);
     }
 }
 

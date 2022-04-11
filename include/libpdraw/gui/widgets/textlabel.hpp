@@ -32,4 +32,8 @@ public:
     void SetCentered(bool centered);
 
     virtual void Draw(int x, int y);
+
+private:
+    bool autosize;
+    bool centered;
 };

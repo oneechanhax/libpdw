@@ -22,6 +22,7 @@
 //#include <memory>
 #include <algorithm>
 #include <cstring>
+#include <optional>
 #include <vector>
 
 #include "iwidget.hpp"
@@ -40,27 +41,27 @@ public:
         return m_KeyValues;
     }
 
-    inline virtual void OnMouseEnter() { m_KeyValues->SetBool("hover", true); }
-    inline virtual void OnMouseLeave() { m_KeyValues->SetBool("hover", false); }
-    inline virtual void OnMousePress() { m_KeyValues->SetBool("press", true); }
-    inline virtual void OnMouseRelease() { m_KeyValues->SetBool("press", false); }
+    inline virtual void OnMouseEnter() { this->hover = true; }
+    inline virtual void OnMouseLeave() { this->hover = false; }
+    inline virtual void OnMousePress() { this->press = true; }
+    inline virtual void OnMouseRelease() { this->press = false; }
     inline virtual void OnKeyPress(CatKey key, bool repeat) {};
     inline virtual void OnKeyRelease(CatKey key) {};
-    inline virtual void OnFocusGain() { m_KeyValues->SetBool("focus", true); }
-    inline virtual void OnFocusLose() { m_KeyValues->SetBool("focus", false); }
+    inline virtual void OnFocusGain() { this->focus = true; }
+    inline virtual void OnFocusLose() { this->focus = false; }
 
     inline virtual void HandleCustomEvent(std::string_view event) {};
 
     inline virtual bool ConsumesKey(CatKey key) { return false; }
 
-    inline virtual bool AlwaysVisible() { return m_KeyValues->GetBool("always_visible"); }
+    inline virtual bool AlwaysVisible() { return this->always_visible; }
 
-    inline virtual void Show() { m_KeyValues->SetBool("visible", true); }
-    inline virtual void Hide() { m_KeyValues->SetBool("visible", false); }
+    inline virtual void Show() { this->visible = true; }
+    inline virtual void Hide() { this->visible = false; }
     inline virtual bool IsVisible() {
         if (GetParent())
-            return GetParent()->IsVisible() && m_KeyValues->GetBool("visible");
-        return m_KeyValues->GetBool("visible");
+            return GetParent()->IsVisible() && this->visible;
+        return this->visible;
     }
 
     virtual bool IsHovered();
@@ -71,45 +72,58 @@ public:
 
     inline virtual void SetOffset(int x, int y) {
         if (x >= 0)
-            m_KeyValues->SetInt("offset_x", x);
+            this->offset.first = x;
         if (y >= 0)
-            m_KeyValues->SetInt("offset_y", y);
+            this->offset.second = y;
     }
     inline virtual void SetMaxSize(int x, int y) {
         if (x >= 0)
-            m_KeyValues->SetInt("max_x", x);
+            this->max_size.first = x;
         if (y >= 0)
-            m_KeyValues->SetInt("max_y", y);
+            this->max_size.second = y;
     }
     inline virtual std::pair<int, int> GetOffset() {
-        return std::make_pair(m_KeyValues->GetInt("offset_x"), m_KeyValues->GetInt("offset_y"));
+        return this->offset;
     }
     inline virtual std::pair<int, int> GetSize() {
-        return std::make_pair(m_KeyValues->GetInt("size_x"), m_KeyValues->GetInt("size_y"));
+        return this->size;
     }
     inline virtual std::pair<int, int> GetMaxSize() {
-        return std::make_pair(m_KeyValues->GetInt("max_x"), m_KeyValues->GetInt("max_y"));
+        return this->max_size;
     }
-    inline virtual int GetZIndex() { return m_KeyValues->GetInt("zindex"); }
-    inline virtual void SetZIndex(int idx) { m_KeyValues->SetInt("zindex", idx); }
+    inline virtual int GetZIndex() { return this->zindex; }
+    inline virtual void SetZIndex(int idx) { this->zindex = idx; }
 
-    inline virtual std::string GetTooltip() { return std::string(m_KeyValues->GetString("tooltip")); }
+    inline virtual std::string GetTooltip() { return this->tooltip; }
 
     inline virtual PositionMode GetPositionMode() { return (PositionMode)m_KeyValues->GetInt("positionmode"); }
     inline virtual void SetPositionMode(PositionMode mode) { m_KeyValues->SetInt("positionmode", mode); };
 
     inline virtual IWidget* GetParent() { return m_pParent; }
     inline virtual void SetParent(IWidget* parent) { m_pParent = parent; }
-    inline virtual std::string GetName() { return std::string(m_KeyValues->GetString("name")); }
+    inline virtual std::string GetName() { return this->name; }
 
     std::pair<int, int> AbsolutePosition();
     inline void SetSize(int x, int y) {
         if (x >= 0)
-            m_KeyValues->SetInt("size_x", x);
+            this->size.first = x;
         if (y >= 0)
-            m_KeyValues->SetInt("size_y", y);
+            this->size.second = y;
     }
 
     KeyValues* m_KeyValues;
     IWidget* m_pParent;
+    std::pair<int, int> offset;
+    std::pair<int, int> size;
+    std::pair<int, int> max_size;
+    std::string name;
+    std::string tooltip;
+    std::optional<glez::rgba> bounds_color;
+    int zindex;
+    bool visible;
+    bool always_visible;
+
+    bool hover;
+    bool press;
+    bool focus;
 };

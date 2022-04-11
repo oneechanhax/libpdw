@@ -30,13 +30,13 @@ namespace ncc {
 ItemTitle::ItemTitle(std::string title)
     : Item("ncc_list_title")
     , title(title) {
-    Props()->SetBool("brackets3", false);
+    this->brackets = false;
 }
 
 void ItemTitle::Draw(int x, int y) {
     Item::Draw(x, y);
     // nailed it
-    bool brackets3 = Props()->GetBool("brackets3");
+    bool brackets3 = this->brackets;
     std::string str = (brackets3 ? ">>> " : ">> ") + title + (brackets3 ? " <<<" : " <<");
     std::pair<float, float> size;
     g_pGUI->GetRootWindow()->GetFont().stringSize(str, &size.first, &size.second);
