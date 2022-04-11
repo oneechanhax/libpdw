@@ -26,7 +26,7 @@
 
 CMenuListEntry::CMenuListEntry(std::string name, CMenuList* parent, std::string entry)
     : CBaseButton(name, parent, entry) {
-    Props()->SetString("entry", entry.c_str());
+    this->entry = entry;
 }
 
 void CMenuListEntry::SetMaxSize(int x, int y) {

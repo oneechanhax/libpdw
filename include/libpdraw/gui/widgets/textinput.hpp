@@ -41,4 +41,5 @@ public:
     void SetValue(std::string value);
 
     TextInputCallbackFn_t m_pCallback;
+    std::string value;
 };

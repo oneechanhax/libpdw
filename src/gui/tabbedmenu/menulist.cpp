@@ -31,9 +31,9 @@ CMenuList::CMenuList(std::string name, CMenuWindow* parent)
 void CMenuList::AddEntry(std::string id, std::string name) {
     CMenuListEntry* entry = new CMenuListEntry("entry_" + id, this, id);
     entry->SetText(name);
-    entry->SetCallback([this](CBaseButton* thisptr) {
+    entry->SetCallback([entry](CBaseButton* thisptr) {
         CMenuWindow* window = dynamic_cast<CMenuWindow*>(thisptr->GetParent()->GetParent());
-        window->SelectTab(thisptr->Props()->GetString("entry"));
+        window->SelectTab(entry->entry);
     });
     AddChild(entry);
 }

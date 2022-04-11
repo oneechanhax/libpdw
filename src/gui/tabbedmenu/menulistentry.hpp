@@ -31,4 +31,7 @@ public:
 
     virtual void SetMaxSize(int x, int y) override;
     virtual void Draw(int x, int y) override;
+
+public:
+    std::string entry;
 };

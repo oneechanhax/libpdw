@@ -26,7 +26,7 @@
 
 CTextInput::CTextInput(std::string name, IWidget* parent)
     : CBaseWidget(name, parent) {
-    this->Props()->SetString("value", "");
+    this->value = "";
     this->focus = false;
     this->SetMaxWidth(8);
 }
@@ -42,14 +42,14 @@ void CTextInput::SetMaxWidth(int width) {
 }
 
 std::string CTextInput::Value() {
-    return std::string(Props()->GetString("value"));
+    return this->value;
 }
 
 void CTextInput::SetValue(std::string value) {
     std::string oldv = Value();
     if (m_pCallback)
         m_pCallback(this, oldv, value);
-    Props()->SetString("value", value.c_str());
+    this->value = value;
 }
 
 void CTextInput::Draw(int x, int y) {

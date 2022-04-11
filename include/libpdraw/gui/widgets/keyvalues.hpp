@@ -39,11 +39,11 @@ public:
     [[deprecated]] void SetInt(const std::string& s, int v) { this->stored_ints[s] = v; }
     [[deprecated]] float GetFloat(const std::string& s) { return this->stored_floats.at(s); }
     [[deprecated]] void SetFloat(const std::string& s, float v) { this->stored_floats[s] = v; }
-    std::string GetString(const std::string& s) { return this->stored_strings.at(s); }
-    void SetString(const std::string& s, const std::string& v) { this->stored_strings[s] = v; }
-    glez::rgba GetColor(const std::string& s) { return this->stored_colors.at(s); }
-    void SetColor(const std::string& s, glez::rgba v) { this->stored_colors[s] = v; }
-    bool FindKey(const std::string& s) {
+    [[deprecated]] std::string GetString(const std::string& s) { return this->stored_strings.at(s); }
+    [[deprecated]] void SetString(const std::string& s, const std::string& v) { this->stored_strings[s] = v; }
+    [[deprecated]] glez::rgba GetColor(const std::string& s) { return this->stored_colors.at(s); }
+    [[deprecated]] void SetColor(const std::string& s, glez::rgba v) { this->stored_colors[s] = v; }
+    [[deprecated]] bool FindKey(const std::string& s) {
         {
             auto find = stored_bools.find(s);
             if (find != stored_bools.end())
@@ -71,7 +71,34 @@ public:
         }
         return false;
     }
-    bool IsEmpty(const std::string& s) {
-        return !this->FindKey(s);
+    [[deprecated]] bool IsEmpty(const std::string& s) {
+        return ![this](const std::string& s) {
+            {
+                auto find = stored_bools.find(s);
+                if (find != stored_bools.end())
+                    return true;
+            }
+            {
+                auto find = stored_ints.find(s);
+                if (find != stored_ints.end())
+                    return true;
+            }
+            {
+                auto find = stored_floats.find(s);
+                if (find != stored_floats.end())
+                    return true;
+            }
+            {
+                auto find = stored_strings.find(s);
+                if (find != stored_strings.end())
+                    return true;
+            }
+            {
+                auto find = stored_colors.find(s);
+                if (find != stored_colors.end())
+                    return true;
+            }
+            return false;
+        }(s);
     }
 };

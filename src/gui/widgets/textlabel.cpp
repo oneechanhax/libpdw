@@ -88,7 +88,7 @@ void CTextLabel::SetPadding(int x, int y) {
 
 void CTextLabel::SetText(std::string text) {
     // unsigned long font_handle = Props()->GetInt("font", fonts::MENU);
-    Props()->SetString("text", text.c_str());
+    this->text = text;
     std::pair<float, float> size;
     g_pGUI->GetRootWindow()->GetFont().stringSize(text, &size.first, &size.second);
     if (this->autosize) {
@@ -102,14 +102,14 @@ void CTextLabel::SetText(std::string text) {
             std::pair<float, float> size2;
             g_pGUI->GetRootWindow()->GetFont().stringSize(txt, &size2.first, &size2.second);
             SetSize(size2.first + padding.first * 2, size2.second + padding.second * 2);
-            Props()->SetString("text", txt);
+            this->text = txt;
         }
     }
 }
 
 std::string CTextLabel::GetText() {
     // return std::string(Props()->GetString("text", ""));
-    return std::string(Props()->GetString("text"));
+    return this->text;
 }
 
 void CTextLabel::Draw(int x, int y) {
