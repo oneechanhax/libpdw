@@ -26,6 +26,13 @@ public:
     CBaseContainer(std::string name = "unnamed", IWidget* parent = nullptr);
     virtual ~CBaseContainer();
 
+    template <typename T, class... Args>
+    T* Add(Args... args) {
+        auto* ret = new T(this, args...);
+        this->m_children.push_back(ret);
+        return ret;
+    };
+
     void AddChild(IWidget* child);
     int ChildCount();
     virtual IWidget* ChildByIndex(int idx);
