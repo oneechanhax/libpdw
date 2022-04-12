@@ -14,7 +14,7 @@
 
 #include "gui/widgets/titlebar.hpp"
 
-CMenuWindow::CMenuWindow(std::string name, IWidget* parent)
+CMenuWindow::CMenuWindow(IWidget* parent, std::string name)
     : CBaseWindow(parent, name) {
     m_pList = new CMenuList("list", this);
     AddChild(m_pList);

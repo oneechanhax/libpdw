@@ -28,7 +28,9 @@ typedef std::function<void(CDropdown*, int)> DropdownCallbackFn_t;
 
 class CDropdown : public CBaseButton {
 public:
-    CDropdown(std::string name = "unnamed", IWidget* parent = nullptr);
+    CDropdown(IWidget* parent = nullptr, std::string name = "unnamed");
+    CDropdown(std::string name = "unnamed", IWidget* parent = nullptr)
+        : CDropdown(parent, name) { }
     ~CDropdown();
 
     void AddValue(std::string);

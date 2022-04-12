@@ -60,7 +60,7 @@ static std::string WordWrap(std::string& in, int max, glez::font& font) {
     return result.str();
 }
 
-CTextLabel::CTextLabel(std::string name, IWidget* parent, std::string text, bool centered)
+CTextLabel::CTextLabel(IWidget* parent, std::string name, std::string text, bool centered)
     : CBaseWidget(name, parent) {
     this->max_size.first = 50;
     this->SetPadding(3, 3);

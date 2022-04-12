@@ -23,7 +23,7 @@
 
 #include "gui/widgets/checkbox.hpp"
 
-CCheckbox::CCheckbox(std::string name, IWidget* parent, bool checked)
+CCheckbox::CCheckbox(IWidget* parent, std::string name, bool checked)
     : CBaseWidget(name, parent) {
     SetWidth(16);
     SetValue(checked);

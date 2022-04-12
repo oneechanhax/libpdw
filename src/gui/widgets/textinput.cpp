@@ -23,7 +23,7 @@
 
 #include "gui/widgets/textinput.hpp"
 
-CTextInput::CTextInput(std::string name, IWidget* parent)
+CTextInput::CTextInput(IWidget* parent, std::string name)
     : CBaseWidget(name, parent) {
     this->value = "";
     this->focus = false;

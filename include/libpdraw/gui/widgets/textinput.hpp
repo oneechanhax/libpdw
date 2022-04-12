@@ -27,7 +27,9 @@ typedef std::function<void(CTextInput*, std::string, std::string)> TextInputCall
 
 class CTextInput : public CBaseWidget {
 public:
-    CTextInput(std::string name = "unnamed", IWidget* parent = nullptr);
+    CTextInput(IWidget* parent, std::string name = "unnamed");
+    CTextInput(std::string name = "unnamed", IWidget* parent = nullptr)
+        : CTextInput(parent, name) { }
 
     virtual void OnKeyPress(CatKey key, bool repeat);
     virtual void Draw(int x, int y);

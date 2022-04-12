@@ -27,7 +27,9 @@ typedef std::function<void(CKeyInput*, CatKey)> KeyInputCallbackFn_t;
 
 class CKeyInput : public CBaseWidget {
 public:
-    CKeyInput(std::string name = "unnamed", IWidget* parent = nullptr);
+    CKeyInput(IWidget* parent, std::string name = "unnamed");
+    CKeyInput(std::string name = "unnamed", IWidget* parent = nullptr)
+        : CKeyInput(parent, name) { }
 
     CatKey Value();
     void SetValue(int value);

@@ -23,7 +23,7 @@
 
 #include "gui/canvas.hpp"
 
-CBaseButton::CBaseButton(std::string name, IWidget* parent, std::string text, ButtonCallbackFn_t callback)
+CBaseButton::CBaseButton(IWidget* parent, std::string name, std::string text, ButtonCallbackFn_t callback)
     : CTextLabel(name, parent, text) {
     SetPadding(BUTTON_PADDING_W, BUTTON_PADDING_H);
     SetText(text);

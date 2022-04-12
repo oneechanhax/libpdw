@@ -23,7 +23,7 @@
 
 #include "gui/widgets/keyinput.hpp"
 
-CKeyInput::CKeyInput(std::string name, IWidget* parent)
+CKeyInput::CKeyInput(IWidget* parent, std::string name)
     : CBaseWidget(name, parent) {
     this->value = 0;
     this->capturing = false;

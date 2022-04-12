@@ -27,7 +27,9 @@ typedef std::function<void(CSlider*, float, float)> SliderCallbackFn_t;
 
 class CSlider : public CBaseWidget {
 public:
-    CSlider(std::string name = "", IWidget* parent = nullptr);
+    CSlider(IWidget* parent, std::string name = "");
+    CSlider(std::string name = "", IWidget* parent = nullptr)
+        : CSlider(parent, name) { }
 
     void Setup(float min, float max);
     void SetStep(float step);

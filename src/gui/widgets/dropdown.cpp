@@ -23,7 +23,7 @@
 #include "gui/widgets/dropdown.hpp"
 #include "gui/widgets/dropdownlist.hpp"
 
-CDropdown::CDropdown(std::string name, IWidget* parent)
+CDropdown::CDropdown(IWidget* parent, std::string name)
     : CBaseButton(name, parent) {
     list = new CDropdownList(name + "_list", this);
     this->GetCanvas()->AddChild(list);

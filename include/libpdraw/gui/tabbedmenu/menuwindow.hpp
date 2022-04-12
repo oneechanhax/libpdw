@@ -27,7 +27,9 @@ class CTitleBar;
 
 class CMenuWindow : public CBaseWindow {
 public:
-    CMenuWindow(std::string name, IWidget* parent);
+    CMenuWindow(IWidget* parent, std::string name);
+    CMenuWindow(std::string name, IWidget* parent)
+        : CMenuWindow(parent, name) { }
 
     void AddElements();
 

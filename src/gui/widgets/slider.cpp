@@ -24,7 +24,7 @@
 
 #include "gui/widgets/slider.hpp"
 
-CSlider::CSlider(std::string name, IWidget* parent)
+CSlider::CSlider(IWidget* parent, std::string name)
     : CBaseWidget(name, parent) {
     Setup(0.0f, 1.0f);
     SetSize(80, 16);

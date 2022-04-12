@@ -27,7 +27,9 @@ typedef std::function<void(CCheckbox*, bool)> CheckboxCallbackFn_t;
 
 class CCheckbox : public CBaseWidget {
 public:
-    CCheckbox(std::string name = "unnamed", IWidget* parent = nullptr, bool checked = false);
+    CCheckbox(IWidget* parent, std::string name = "unnamed", bool checked = false);
+    CCheckbox(std::string name = "unnamed", IWidget* parent = nullptr, bool checked = false)
+        : CCheckbox(parent, name, checked) { }
 
     void SetWidth(int width);
     inline bool Value() { return this->checked; }

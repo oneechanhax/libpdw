@@ -60,44 +60,36 @@ public:
         : CBaseWindow(parent, "root_test") {
         this->always_visible = false;
         this->hover = false;
-        SetMaxSize(1270, 1000);
-        SetPositionMode(PositionMode::FLOATING);
+        this->SetMaxSize(1270, 1000);
+        this->SetPositionMode(PositionMode::FLOATING);
 
-        auto* titlebar = new CTitleBar(this, "Test uwu~");
-        AddChild(titlebar);
+        this->Add<CTitleBar>("Test uwu~");
         // this->visible = true;
 
-        AddChild(new CTextLabel("button_label", this, "Button widget:"));
-        AddChild(new CBaseButton("button", this, "I'm Clickable!", [this](CBaseButton*) {
+        this->Add<CTextLabel>("button_label", "Button widget:");
+        this->Add<CBaseButton>("button", "I'm Clickable!", [this](CBaseButton*) {
             std::cout << "Hey hey I was pressed!" << std::endl;
             this->button_clicked = !this->button_clicked;
-        }));
+        });
 
-        AddChild(new CTextLabel("checkbox_label", this, "Checkbox widget:"));
-        AddChild(new CCheckbox("checkbox", this, false));
+        this->Add<CTextLabel>("checkbox_label", "Checkbox widget:");
+        this->Add<CCheckbox>("checkbox", false);
 
-        AddChild(new CTextLabel("slider_label", this, "Slider widget:"));
-        auto* slider = new CSlider("slider", this);
-        slider->SetStep(0.1f);
-        AddChild(slider);
+        this->Add<CTextLabel>("slider_label", "Slider widget:");
+        this->Add<CSlider>("slider")->SetStep(0.1f);
 
-        AddChild(new CTextLabel("dropdown_label", this, "Dropdown widget:"));
-        auto dropdown = new CDropdown("dropdown", this);
+        this->Add<CTextLabel>("dropdown_label", "Dropdown widget:");
+        auto* dropdown = this->Add<CDropdown>("dropdown");
         dropdown->AddValue("Im the cutest princess!");
         dropdown->AddValue("No I am, hmp!");
         dropdown->AddValue("*doomguy noises*");
         dropdown->SetSize(150, 16);
-        AddChild(dropdown);
 
-        AddChild(new CTextLabel("text_input_label", this, "Text input widget:"));
-        auto* text_input = new CTextInput("text_input", this);
-        text_input->SetValue("You can edit me!");
-        AddChild(text_input);
+        this->Add<CTextLabel>("text_input_label", "Text input widget:");
+        this->Add<CTextInput>("text_input")->SetValue("You can edit me!");
 
-        AddChild(new CTextLabel("key_input_label", this, "Key widget:"));
-        auto key_input = new CKeyInput("key_input");
-        key_input->SetSize(78, 10);
-        AddChild(key_input);
+        this->Add<CTextLabel>("key_input_label", "Key widget:");
+        this->Add<CKeyInput>("key_input")->SetSize(78, 10);
     }
     virtual void Update() override {
         this->CBaseWindow::Update();
@@ -149,10 +141,9 @@ int main() {
         glez::end();
         xoverlay_draw_end();
     }
+    auto bounds = input::GetBounds();
 
-    auto test_window = new TestWindow(canvas);
-
-    canvas->AddChild(test_window);
+    auto test_window = canvas->Add<TestWindow>();
 
     using namespace menu::ncc;
     // auto* list_menu = List::FromString(menu_list);
@@ -167,29 +158,26 @@ int main() {
     list_menu->SetMaxSize(1000, 1000);
     list_menu->Show();
     canvas->AddChild(list_menu);
+    list_menu->SetOffset((bounds.first - 912) / 4, (bounds.second - 410) / 3);
 
-    auto* tabbedmenu = new CMenuWindow("menu_window", canvas);
+    auto* tabbedmenu = canvas->Add<CMenuWindow>("menu_window");
     tabbedmenu->SetMaxSize(912, 410);
 
     tabbedmenu->AddTab("aimbot", "Main");
     CMenuContainer* tab = tabbedmenu->GetTab("aimbot");
-    tab->AddChild(new CTextLabel("label", tab, "This is a bool!", true));
-    tab->AddChild(new CCVarContainer(tab, &text));
+    tab->Add<CTextLabel>("label", "This is a bool!", true);
+    tab->Add<CCVarContainer>(&text);
     tabbedmenu->AddTab("esp", "Sub");
     tabbedmenu->AddTab("esp2", "Sub2");
     tabbedmenu->AddTab("esp3", "Sub3");
+    tabbedmenu->SetOffset((bounds.first - 912) / 2, (bounds.second - 410) / 2);
 
-    // tabbedmenu->SetOffset((draw::width - 912) / 2, (draw::height - 410) / 2);
-    canvas->AddChild(tabbedmenu);
-
-    auto* logo = new ncc::Logo(canvas);
-    logo->SetOffset(500, 25);
-    canvas->AddChild(logo);
+    canvas->Add<ncc::Logo>()->SetOffset(500, 25);
 
     canvas->AddChild(new ncc::Background());
 
-    for (auto& i : ui::BaseVar::GetList())
-        printf("ui::BaseVar: %s\n", i->command_name.c_str());
+    /*for (auto& i : ui::BaseVar::GetList())
+        printf("ui::BaseVar: %s\n", i->command_name.c_str());*/
     xoverlay_show();
     while (1) {
         input::RefreshInput();
