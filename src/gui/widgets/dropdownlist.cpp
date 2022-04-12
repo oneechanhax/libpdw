@@ -26,7 +26,7 @@
 #include "gui/canvas.hpp"
 
 CDropdownList::CDropdownList(std::string name, CDropdown* menu, int offset)
-    : CBaseContainer(name, nullptr) {
+    : CBaseContainer(name, menu) {
     m_pMenu = menu;
     Hide();
     SetZIndex(5);

@@ -57,7 +57,7 @@ static ui::Var<int> text({ "nonya" }, "Editable Text", 1);
 class TestWindow : public CBaseWindow {
 public:
     TestWindow(IWidget* parent)
-        : CBaseWindow("root_test", parent) {
+        : CBaseWindow(parent, "root_test") {
         this->always_visible = false;
         this->hover = false;
         SetMaxSize(1270, 1000);

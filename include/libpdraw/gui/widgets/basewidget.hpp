@@ -58,11 +58,7 @@ public:
 
     inline virtual void Show() { this->visible = true; }
     inline virtual void Hide() { this->visible = false; }
-    inline virtual bool IsVisible() {
-        if (GetParent())
-            return GetParent()->IsVisible() && this->visible;
-        return this->visible;
-    }
+    virtual bool IsVisible();
 
     virtual bool IsHovered();
     virtual bool IsFocused();

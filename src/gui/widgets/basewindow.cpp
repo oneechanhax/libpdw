@@ -41,9 +41,8 @@ void CBaseWindow::MoveChildren() {
         if (c->GetPositionMode() != FLOATING)
             my += (size.second + 2);
     }
-    if (GetParent()) {
+    if (GetParent())
         SetSize(mx + 4, my + 2);
-    }
 }
 
 void CBaseWindow::OnFocusGain() {

@@ -78,13 +78,15 @@ std::pair<int, int> CBaseWidget::AbsolutePosition() {
     return result;
 }
 
+bool CBaseWidget::IsVisible() {
+    return this->visible && (!this->GetParent() || GetParent()->IsVisible());
+}
+
 Canvas* CBaseWidget::GetCanvas() {
-    auto* parent = GetParent();
-    if (parent) {
-        if (auto* canvas = parent->GetCanvas())
-            return canvas;
-    }
     auto* ret = dynamic_cast<Canvas*>(this);
+    if (ret)
+        return ret;
+    ret = this->GetParent()->GetCanvas();
     assert(ret);
     return ret;
 }

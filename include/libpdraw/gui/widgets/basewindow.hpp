@@ -23,7 +23,7 @@
 
 class CBaseWindow : public CBaseContainer {
 public:
-    inline CBaseWindow(std::string name = "unnamed", IWidget* parent = nullptr)
+    inline CBaseWindow(IWidget* parent, std::string name = "unnamed")
         : CBaseContainer(name, parent) { }
     inline virtual ~CBaseWindow() {};
 

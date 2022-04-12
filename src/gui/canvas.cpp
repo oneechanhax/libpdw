@@ -41,7 +41,7 @@
 ui::Var<bool> gui_draw_bounds({ "Gui", "Debug" }, "Draw Bounds", false);
 ui::Var<bool> gui_visible({ "Gui" }, "Visible", true);
 Canvas::Canvas()
-    : CBaseWindow("root") { }
+    : CBaseWindow(nullptr, "root") { }
 
 // Crashes associated with no set root in globals
 void Canvas::Setup() {
