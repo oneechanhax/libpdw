@@ -17,8 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LIST_HPP_
-#define LIST_HPP_
+#pragma once
 
 #include <var.hpp>
 
@@ -35,8 +34,8 @@ public:
     List();
 
     void Fill(ui::BaseVar*);
-    void Fill(const std::string vec);
-    void Fill(const std::vector<ui::BaseVar*>& vec);
+    void Fill(const std::string);
+    void Fill(const std::vector<ui::BaseVar*>&);
 
     List* ForceGetSublist(std::string_view);
     List* FindSublist(std::string_view);
@@ -45,7 +44,7 @@ public:
     void OpenSublist(List* sublist, int dy);
     bool ShouldClose();
 
-    static List* FromString(const std::string& string);
+    [[deprecated]] static List* FromString(const std::string& string);
 
     // virtual IWidget* ChildByPoint(int x, int y) override;
     inline virtual void SortByZIndex() override {};
@@ -71,5 +70,3 @@ private:
 
 }
 } // namespace menu::ncc
-
-#endif /* LIST_HPP_ */
