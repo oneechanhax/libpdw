@@ -17,9 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <hydride.h>
 #include <iostream>
 
-#include "lib/xoverlay.h"
 #include <embed_resources.hpp>
 #include <glez/detail/render.hpp>
 #include <glez/draw.hpp>
@@ -125,21 +125,21 @@ static const std::string menu_list = R"(
 )";
 
 int main() {
-    xoverlay_init();
+    hydride_init();
 
-    glez::init(xoverlay_library.width, xoverlay_library.height);
+    glez::init(hydride_library.width, hydride_library.height);
 
     Canvas* canvas;
     {
         input::RefreshInput();
-        xoverlay_draw_begin();
+        hydride_draw_begin();
         glez::begin();
 
         canvas = new Canvas();
         canvas->Setup();
 
         glez::end();
-        xoverlay_draw_end();
+        hydride_draw_end();
     }
     auto bounds = input::GetBounds();
 
@@ -178,11 +178,11 @@ int main() {
 
     /*for (auto& i : ui::BaseVar::GetList())
         printf("ui::BaseVar: %s\n", i->command_name.c_str());*/
-    xoverlay_show();
+    hydride_show();
     while (1) {
         input::RefreshInput();
         // Must be called in that order.
-        xoverlay_draw_begin();
+        hydride_draw_begin();
         glez::begin();
         {
 
@@ -205,7 +205,7 @@ int main() {
             }*/
         }
         glez::end();
-        xoverlay_draw_end();
+        hydride_draw_end();
     }
     return 0;
 }

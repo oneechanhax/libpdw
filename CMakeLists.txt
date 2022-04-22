@@ -155,7 +155,7 @@ if(PNG_FOUND AND GLEW_FOUND AND OPENGL_FOUND AND X11_FOUND AND FREETYPE_FOUND)
 
     target_include_directories(example PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/" "${CMAKE_CURRENT_SOURCE_DIR}/include/")
     target_link_libraries(example libpdw
-                        "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/libxoverlay.a"
+                         hydride 
                          glez
                          ${PNG_LIBRARIES} GL GLU GLEW ${FREETYPE_LIBRARIES} ${X11_X11_LIB} ${X11_Xext_LIB} ${X11_Xfixes_LIB})
 endif()

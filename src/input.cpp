@@ -19,10 +19,10 @@
 
 #include <X11/Xutil.h> // For xlibs keycodes, window geometry
 #include <bitset> // For caching pressed keys
+#include <hydride.h>
 
 #include "functional.hpp"
 
-#include "../example-src/lib/xoverlay.h"
 #include "input.hpp"
 
 namespace input {
@@ -159,12 +159,12 @@ static std::pair<int, int> bounds(-1, -1);
 
 // Request this to update the input system on button, mouse, and window info
 void RefreshInput() {
-    if (!xoverlay_library.display || !xoverlay_library.window)
+    if (!hydride_library.display || !hydride_library.window)
         return;
 
     // Get window bounds
-    if (xoverlay_library.width != bounds.first || xoverlay_library.height != bounds.second) { // Activate on change
-        bounds = std::make_pair(xoverlay_library.width, xoverlay_library.height);
+    if (hydride_library.width != bounds.first || hydride_library.height != bounds.second) { // Activate on change
+        bounds = std::make_pair(hydride_library.width, hydride_library.height);
         input::bounds_event.Emit(bounds);
     }
 
@@ -172,7 +172,7 @@ void RefreshInput() {
     Window root_return, child_return;
     int root_x, root_y, mousex, mousey;
     unsigned int mask_return;
-    if (XQueryPointer(xoverlay_library.display, xoverlay_library.window, &root_return, &child_return, &root_x, &root_y, &mousex, &mousey, &mask_return)) { // only update the cursor if this returns true
+    if (XQueryPointer(hydride_library.display, hydride_library.window, &root_return, &child_return, &root_x, &root_y, &mousex, &mousey, &mask_return)) { // only update the cursor if this returns true
         if ((mousex != mouse.first || mousey != mouse.second) // Activate on change
             && (mousex >= 0 && mousey >= 0 && mousex <= bounds.first && mousey <= bounds.second)) { // Clamp positions to the window
             mouse = std::make_pair(mousex, mousey);
@@ -199,12 +199,12 @@ void RefreshInput() {
 
     // Find depressed keys and save them to the stored map
     char keys[32];
-    XQueryKeymap(xoverlay_library.display, keys);
+    XQueryKeymap(hydride_library.display, keys);
     // Recurse through the map looking for depressed keys
     for (const auto& current : xlibToCatVar) {
 
         // Get the keycode for the key we are looking for...
-        int current_key = XKeysymToKeycode(xoverlay_library.display, current.first);
+        int current_key = XKeysymToKeycode(hydride_library.display, current.first);
 
         // Use the keymap with bitwise logic to get state, oof this took forever to make
         bool pressed = (keys[current_key / 8] & (1 << (current_key % 8)));
