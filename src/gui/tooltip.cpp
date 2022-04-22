@@ -1,6 +1,6 @@
 
 /*
- * Libpdraw: A Versitile GUI for use with a primitive drawing system!
+ * Libpdw: Primitives Done Well!
  * Copyright (C) 2022 Rebekah Rowe
  *
  * This program is free software: you can redistribute it and/or modify

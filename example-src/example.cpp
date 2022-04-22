@@ -28,27 +28,27 @@
 // xorg conflict
 #undef RootWindow
 
-#include "libpdraw/gui/widgets/slider.hpp"
-#include "libpdraw/gui/widgets/titlebar.hpp"
+#include "libpdw/gui/widgets/slider.hpp"
+#include "libpdw/gui/widgets/titlebar.hpp"
 //#include "gui/csplitcontainer.hpp"
-#include "libpdraw/gui/canvas.hpp"
-#include "libpdraw/gui/widgets/basebutton.hpp"
-#include "libpdraw/gui/widgets/basewindow.hpp"
-#include "libpdraw/gui/widgets/checkbox.hpp"
-#include "libpdraw/gui/widgets/dropdown.hpp"
-#include "libpdraw/gui/widgets/keyinput.hpp"
-#include "libpdraw/gui/widgets/textinput.hpp"
+#include "libpdw/gui/canvas.hpp"
+#include "libpdw/gui/widgets/basebutton.hpp"
+#include "libpdw/gui/widgets/basewindow.hpp"
+#include "libpdw/gui/widgets/checkbox.hpp"
+#include "libpdw/gui/widgets/dropdown.hpp"
+#include "libpdw/gui/widgets/keyinput.hpp"
+#include "libpdw/gui/widgets/textinput.hpp"
 
-#include "libpdraw/gui/listmenu/itemsublist.hpp"
-#include "libpdraw/gui/listmenu/itemtitle.hpp"
-#include "libpdraw/gui/listmenu/itemvariable.hpp"
-#include "libpdraw/gui/listmenu/list.hpp"
-#include "libpdraw/gui/tabbedmenu/cvarcontainer.hpp"
-#include "libpdraw/gui/tabbedmenu/menucontainer.hpp"
-#include "libpdraw/gui/tabbedmenu/menuwindow.hpp"
+#include "libpdw/gui/listmenu/itemsublist.hpp"
+#include "libpdw/gui/listmenu/itemtitle.hpp"
+#include "libpdw/gui/listmenu/itemvariable.hpp"
+#include "libpdw/gui/listmenu/list.hpp"
+#include "libpdw/gui/tabbedmenu/cvarcontainer.hpp"
+#include "libpdw/gui/tabbedmenu/menucontainer.hpp"
+#include "libpdw/gui/tabbedmenu/menuwindow.hpp"
 
-#include "libpdraw/gui/ncc/background.hpp"
-#include "libpdraw/gui/ncc/logo.hpp"
+#include "libpdw/gui/ncc/background.hpp"
+#include "libpdw/gui/ncc/logo.hpp"
 
 #include "input.hpp"
 
@@ -94,7 +94,7 @@ public:
     virtual void Update() override {
         this->CBaseWindow::Update();
         if (this->button_clicked)
-            this->GetCanvas()->ShowTooltip("This is an example of a very long tooltip! You can click me again to hide me from view. Thanks for using libpdraw ;)");
+            this->GetCanvas()->ShowTooltip("This is an example of a very long tooltip! You can click me again to hide me from view. Thanks for using libpdw ;)");
     }
     CTextInput* text_box = nullptr;
     bool button_clicked = false;

@@ -1,5 +1,5 @@
 
-# Libpdraw: A Versitile GUI for use with a primitive drawing system!
+# Libpdw: Primitives Done well!
 # Copyright (C) 2022 Rebekah Rowe
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# libpdraw
+# libpdw
 cmake_minimum_required (VERSION 3.20)
-project (libpdraw VERSION 1.0.0 LANGUAGES CXX)
+project (libpdw VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -133,11 +133,11 @@ endfunction()
 EmbedResources("${CMAKE_CURRENT_SOURCE_DIR}/res/opensans.ttf" "${CMAKE_CURRENT_SOURCE_DIR}/res/logo.png" "${CMAKE_CURRENT_SOURCE_DIR}/res/flame.png" "${CMAKE_CURRENT_SOURCE_DIR}/res/heart.png" "${CMAKE_CURRENT_SOURCE_DIR}/res/raindrop.png" "${CMAKE_CURRENT_SOURCE_DIR}/res/raindrop2.png" "${CMAKE_CURRENT_SOURCE_DIR}/res/snowflake.png")
 
 file(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-add_library(libpdraw STATIC ${EMBED_OBJ_RET} ${sources})
-target_include_directories(libpdraw PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/" "${CMAKE_CURRENT_SOURCE_DIR}/src/" "${CMAKE_CURRENT_SOURCE_DIR}/include/libpdraw" "${EMBED_HEADER_DIR}")
+add_library(libpdw STATIC ${EMBED_OBJ_RET} ${sources})
+target_include_directories(libpdw PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/" "${CMAKE_CURRENT_SOURCE_DIR}/src/" "${CMAKE_CURRENT_SOURCE_DIR}/include/libpdw" "${EMBED_HEADER_DIR}")
 
 if (DOXYGEN_FOUND)
-    doxygen_add_docs(libpdraw-docs)
+    doxygen_add_docs(libpdw-docs)
 endif()
 
 # Example using xoverlay
@@ -154,7 +154,7 @@ if(PNG_FOUND AND GLEW_FOUND AND OPENGL_FOUND AND X11_FOUND AND FREETYPE_FOUND)
     add_executable(example ${sources})
 
     target_include_directories(example PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/" "${CMAKE_CURRENT_SOURCE_DIR}/include/")
-    target_link_libraries(example libpdraw
+    target_link_libraries(example libpdw
                         "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/libxoverlay.a"
                          glez
                          ${PNG_LIBRARIES} GL GLU GLEW ${FREETYPE_LIBRARIES} ${X11_X11_LIB} ${X11_Xext_LIB} ${X11_Xfixes_LIB})
