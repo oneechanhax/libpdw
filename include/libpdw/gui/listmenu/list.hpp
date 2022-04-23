@@ -53,7 +53,7 @@ public:
     virtual void OnMouseEnter() override;
     virtual void OnMouseLeave() override;
     virtual void OnMouseMove(std::pair<int, int>) override;
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void Update() override;
     virtual void MoveChildren() override;
     virtual void SetParent(IWidget* parent) override;

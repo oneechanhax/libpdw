@@ -170,7 +170,7 @@ void Canvas::Update() {
     tooltip->Hide();
     CBaseWindow::Update();
 
-    this->Draw(0, 0);
+    this->Draw((ICanvas*)this);
 
     // Draw Mouse
     glez::draw::rect(m_iMouseX - 5, m_iMouseY - 5, 10, 10, Transparent(glez::color::black));
@@ -180,11 +180,11 @@ void Canvas::Update() {
         this->DrawBounds(0, 0);
 }
 
-void Canvas::Draw(int x, int y) {
+void Canvas::Draw(ICanvas* canvas) {
     if (tooltip->IsVisible()) {
         tooltip->SetOffset(this->m_iMouseX + 24, this->m_iMouseY + 8);
     }
-    CBaseContainer::Draw(x, y);
+    CBaseContainer::Draw(canvas);
 }
 
 static auto start_time = std::chrono::steady_clock::now();

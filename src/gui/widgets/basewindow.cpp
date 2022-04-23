@@ -55,10 +55,10 @@ void CBaseWindow::OnFocusLose() {
     CBaseContainer::OnFocusLose();
 }
 
-void CBaseWindow::Draw(int x, int y) {
+void CBaseWindow::Draw(ICanvas* canvas) {
     auto abs = AbsolutePosition();
     auto size = GetSize();
     glez::draw::rect(abs.first, abs.second, size.first, size.second, Transparent(glez::color::black, 0.9));
     glez::draw::rect_outline(abs.first, abs.second, size.first, size.second, this->GetCanvas()->GetColor(), 1);
-    CBaseContainer::Draw(x, y);
+    CBaseContainer::Draw(canvas);
 }

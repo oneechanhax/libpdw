@@ -35,7 +35,7 @@ public:
     virtual void SetParent(IWidget*) override;
     virtual bool IsHovered() const override;
     virtual void Update() override;
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void OnKeyPress(CatKey code, bool repeated) override;
     virtual void OnMouseEnter();
     virtual void OnMouseLeave();

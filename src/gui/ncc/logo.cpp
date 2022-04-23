@@ -39,9 +39,9 @@ bool Logo::AlwaysVisible() const {
     return (int)logo == 2;
 }
 
-void Logo::Draw(int x, int y) {
+void Logo::Draw(ICanvas* canvas) {
     if (logo)
-        glez::draw::rect_textured(x, y, embeded_logo_png_rgba.width, embeded_logo_png_rgba.height, this->GetCanvas()->GetColor(), this->texture, 0, 0, embeded_logo_png_rgba.width, embeded_logo_png_rgba.height, 0.0f);
+        canvas->Rect({ { 0, 0 }, { embeded_logo_png_rgba.width, embeded_logo_png_rgba.height } }, this->GetCanvas()->GetColor(), this->texture);
 }
 
 void Logo::OnMouseMove(std::pair<int, int> delta) {

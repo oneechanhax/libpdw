@@ -37,7 +37,7 @@ public:
     void SetCallback(CheckboxCallbackFn_t callback);
 
     virtual void OnMousePress();
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
 
     CheckboxCallbackFn_t m_pCallback;
     bool checked;

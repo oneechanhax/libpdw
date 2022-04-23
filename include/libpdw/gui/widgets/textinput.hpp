@@ -32,7 +32,7 @@ public:
         : CTextInput(parent, name) { }
 
     virtual void OnKeyPress(CatKey key, bool repeat);
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
     virtual bool ConsumesKey(CatKey key);
 
     void PutChar(char ch);

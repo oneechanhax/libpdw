@@ -29,7 +29,7 @@ public:
     CDropdownList(std::string name = "unnamed", CDropdown* menu = nullptr, int offset = 0);
     ~CDropdownList();
 
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
     virtual void MoveChildren();
     inline virtual void SortByZIndex() override {};
     inline virtual bool DoesStealFocus() { return false; }

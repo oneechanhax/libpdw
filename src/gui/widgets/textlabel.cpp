@@ -123,12 +123,12 @@ std::string CTextLabel::GetText() {
     return this->text;
 }
 
-void CTextLabel::Draw(int x, int y) {
+void CTextLabel::Draw(ICanvas* canvas) {
     if (this->centered) {
         auto size = GetSize();
         std::pair<float, float> ssize;
         this->GetCanvas()->GetFont().stringSize(GetText(), &ssize.first, &ssize.second);
-        glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, GetText(), this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+        canvas->String({ (size.first - ssize.first) / 2, (size.second - ssize.second) / 2 }, GetText(), glez::color::white);
     } else
-        glez::draw::string(x, y, GetText(), this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+        canvas->String({ 0, 0 }, GetText(), glez::color::white);
 }

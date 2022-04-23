@@ -34,12 +34,13 @@ enum PositionMode {
 
 class KeyValues;
 class Canvas;
+class ICanvas;
 class IWidget {
 public:
     virtual ~IWidget();
 
     virtual void Update() = 0;
-    virtual void Draw(int x, int y) = 0;
+    virtual void Draw(ICanvas*) = 0;
     virtual void DrawBounds(int x, int y) = 0;
 
     virtual KeyValues* Props() const = 0;

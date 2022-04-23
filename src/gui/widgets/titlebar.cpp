@@ -29,12 +29,12 @@ CTitleBar::CTitleBar(IWidget* parent, std::string title)
     SetPositionMode(ABSOLUTE);
 }
 
-void CTitleBar::Draw(int x, int y) {
+void CTitleBar::Draw(ICanvas* canvas) {
     auto size = GetSize();
-    glez::draw::rect(x, y, size.first, size.second, this->GetCanvas()->GetColor());
+    canvas->Rect({ { 0, 0 }, { size } }, this->GetCanvas()->GetColor());
     float l, h;
     this->GetCanvas()->GetFont().stringSize(m_strTitle, &l, &h);
-    glez::draw::string(x + (size.first - l) / 2, y + TITLEBAR_PADDING_H, m_strTitle, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+    canvas->String({ (size.first - l) / 2, TITLEBAR_PADDING_H }, m_strTitle, glez::color::white);
 }
 
 void CTitleBar::OnMouseMove(std::pair<int, int> delta) {

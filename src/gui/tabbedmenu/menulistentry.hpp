@@ -30,7 +30,7 @@ public:
     bool IsSelected();
 
     virtual void SetMaxSize(int x, int y) override;
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
 
 public:
     std::string entry;

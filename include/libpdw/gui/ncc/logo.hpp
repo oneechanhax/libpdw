@@ -29,7 +29,7 @@ class Logo : public CBaseWidget {
 public:
     Logo(IWidget*);
     virtual bool AlwaysVisible() const override;
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void OnMouseMove(std::pair<int, int>) override;
     glez::texture texture;
 };

@@ -28,7 +28,7 @@ class Tooltip : public CTextLabel {
 public:
     Tooltip();
 
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void HandleCustomEvent(std::string_view event) override;
     inline virtual PositionMode GetPositionMode() const override { return PositionMode::FLOATING; }
     std::pair<int, int> padding;

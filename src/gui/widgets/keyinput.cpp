@@ -38,7 +38,7 @@ void CKeyInput::SetValue(int value) {
     this->value = value;
 }
 
-void CKeyInput::Draw(int x, int y) {
+void CKeyInput::Draw(ICanvas* canvas) {
     std::string key = "";
     glez::rgba color = glez::color::white;
     if (this->capturing) {
@@ -56,7 +56,7 @@ void CKeyInput::Draw(int x, int y) {
     auto size = GetSize();
     std::pair<float, float> ss;
     this->GetCanvas()->GetFont().stringSize(key, &ss.first, &ss.second);
-    glez::draw::string(x + (size.first - ss.first) / 2, y + (size.second - ss.second) / 2, key, this->GetCanvas()->GetFont(), color, nullptr, nullptr);
+    canvas->String({ (size.first - ss.first) / 2, (size.second - ss.second) / 2 }, key, color);
 }
 
 void CKeyInput::SetCallback(KeyInputCallbackFn_t callback) {

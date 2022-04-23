@@ -48,9 +48,9 @@ void CMenuContainer::MoveChildren() {
     this->columns = columns;
 }
 
-void CMenuContainer::Draw(int x, int y) {
-    CBaseContainer::Draw(x, y);
+void CMenuContainer::Draw(ICanvas* canvas) {
+    CBaseContainer::Draw(canvas);
     for (int i = 0; i < this->columns; i++) {
-        glez::draw::line(x + (350 + 3) * (i + 1), y, 0, GetMaxSize().second, this->GetCanvas()->GetColor(), 1);
+        canvas->Line({ { (350 + 3) * (i + 1), 0 }, { 0, GetMaxSize().second } }, this->GetCanvas()->GetColor());
     }
 }

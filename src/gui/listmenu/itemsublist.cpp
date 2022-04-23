@@ -59,15 +59,15 @@ void ItemSublist::Update() {
     }
 }
 
-void ItemSublist::Draw(int x, int y) {
-    Item::Draw(x, y);
+void ItemSublist::Draw(ICanvas* canvas) {
+    Item::Draw(canvas);
     List* parent = dynamic_cast<List*>(GetParent());
     if (!parent)
         throw std::runtime_error("Sublist parent can't be casted to List!");
     const auto& size = GetSize();
     if (parent->open_sublist == list)
-        glez::draw::rect(x, y, size.first, size.second, Transparent(this->GetCanvas()->GetColor(), 0.5f));
-    glez::draw::string(x + 2, y, (IsHovered() ? "[-] " : "[+] ") + title, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+        canvas->Rect({ { 0, 0 }, size }, Transparent(this->GetCanvas()->GetColor(), 0.5f));
+    canvas->String({ 2, 0 }, (IsHovered() ? "[-] " : "[+] ") + title, glez::color::white);
 }
 
 void ItemSublist::OnKeyPress(CatKey code, bool repeated) {

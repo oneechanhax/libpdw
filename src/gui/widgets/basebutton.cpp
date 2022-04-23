@@ -35,15 +35,17 @@ void CBaseButton::SetCallback(ButtonCallbackFn_t callback) {
     m_pCallback = callback;
 }
 
-void CBaseButton::Draw(int x, int y) {
-    glez::rgba textcolor = this->GetCanvas()->GetColor();
+void CBaseButton::Draw(ICanvas* canvas) {
+    auto gui_color = canvas->GetColor();
+    auto textcolor = gui_color;
     auto size = GetSize();
+    const auto zero = std::pair<int, int> { 0, 0 };
     if (IsPressed()) {
-        glez::draw::rect(x, y, size.first, size.second, this->GetCanvas()->GetColor());
+        canvas->Rect({ zero, size }, gui_color);
         textcolor = glez::color::white;
     }
-    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
-    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText().c_str(), this->GetCanvas()->GetFont(), textcolor, nullptr, nullptr);
+    canvas->Rect({ zero, size }, gui_color, CanvasLayer::RectType::Outline);
+    canvas->String(this->padding, GetText(), textcolor);
 }
 
 void CBaseButton::OnMousePress() {

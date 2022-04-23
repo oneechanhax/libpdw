@@ -52,11 +52,12 @@ void CDropdownList::SetValue(int value) {
     Hide();
 }
 
-void CDropdownList::Draw(int x, int y) {
+void CDropdownList::Draw(ICanvas* canvas) {
     auto size = GetSize();
-    glez::draw::rect(x, y, size.first, size.second, Transparent(glez::color::black, 0.85));
-    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
-    CBaseContainer::Draw(x, y);
+
+    canvas->Rect({ { 0, 0 }, size }, Transparent(glez::color::black, 0.85));
+    canvas->Rect({ { 0, 0 }, size }, this->GetCanvas()->GetColor(), CanvasLayer::RectType::Outline);
+    CBaseContainer::Draw(canvas);
 }
 
 void CDropdownList::MoveChildren() {

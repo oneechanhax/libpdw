@@ -40,7 +40,7 @@ public:
     virtual IWidget* ChildByPoint(int x, int y);
 
     virtual bool ConsumesKey(CatKey key);
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
     virtual void DrawBounds(int x, int y);
     virtual void Hide();
     virtual void OnFocusLose();

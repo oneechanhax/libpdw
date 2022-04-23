@@ -29,6 +29,6 @@ public:
 
     virtual void OnFocusGain() override;
     virtual void OnFocusLose() override;
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void MoveChildren() override;
 };

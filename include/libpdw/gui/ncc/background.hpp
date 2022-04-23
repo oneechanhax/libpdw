@@ -42,7 +42,7 @@ public:
     Background();
     ~Background();
     virtual bool AlwaysVisible() const override;
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void Update() override;
     void MakeParticle();
     void KillParticle(Particle* flake);

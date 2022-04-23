@@ -34,11 +34,11 @@ void CCheckbox::SetWidth(int _width) {
     SetSize(_width, _width);
 }
 
-void CCheckbox::Draw(int x, int y) {
+void CCheckbox::Draw(ICanvas* canvas) {
     auto size = GetSize();
-    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
+    canvas->Rect({ { 0, 0 }, size }, this->GetCanvas()->GetColor(), CanvasLayer::RectType::Outline);
     if (Value()) {
-        glez::draw::rect(x + 3, y + 3, size.first - 6, size.second - 6, this->GetCanvas()->GetColor());
+        canvas->Rect({ { 3, 3 }, { size.first - 6, size.second - 6 } }, this->GetCanvas()->GetColor());
     }
 }
 

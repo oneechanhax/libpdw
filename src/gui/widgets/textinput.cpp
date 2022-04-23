@@ -51,15 +51,15 @@ void CTextInput::SetValue(std::string value) {
     this->value = value;
 }
 
-void CTextInput::Draw(int x, int y) {
+void CTextInput::Draw(ICanvas* canvas) {
     std::pair<float, float> wsize;
     this->GetCanvas()->GetFont().stringSize("W", &wsize.first, &wsize.second);
     auto size = GetSize();
     auto color = glez::rgba(0, 0, 0, 80);
     if (IsFocused())
         color = Transparent(this->GetCanvas()->GetColor(), 0.25);
-    glez::draw::rect(x, y, size.first, size.second, color);
-    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
+    canvas->Rect({ { 0, 0 }, { size } }, color);
+    canvas->Rect({ { 0, 0 }, { size } }, this->GetCanvas()->GetColor(), CanvasLayer::RectType::Outline);
     int ml = 0;
     int md = 0;
     std::pair<float, float> dotssize; // TODO static?
@@ -74,9 +74,9 @@ void CTextInput::Draw(int x, int y) {
             ml = i;
     }
     if (ml) {
-        glez::draw::string(x + 2, y + 2, "..." + value.substr(md), this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+        canvas->String({ 2, 2 }, "..." + value.substr(md), glez::color::white);
     } else {
-        glez::draw::string(x + 2, y + 2, value, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr); // TODO recalc on update
+        canvas->String({ 2, 2 }, value, glez::color::white); // TODO recalc on update
     }
 }
 

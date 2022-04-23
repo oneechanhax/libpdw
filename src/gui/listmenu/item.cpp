@@ -35,12 +35,13 @@ Item::Item(std::string name)
     SetMaxSize(psize_x, psize_y);
 }
 
-void Item::Draw(int x, int y) {
+void Item::Draw(ICanvas* canvas) {
     const auto& size = GetSize();
     // draw::DrawRect(x, y, size.first, size.second, colors::red);
-    glez::draw::rect(x, y, size.first, size.second, glez::rgba(0, 0, 0, 55));
+    auto zero = std::pair<int, int> { 0, 0 };
+    canvas->Rect({ zero, size }, glez::rgba(0, 0, 0, 55));
     if (IsHovered()) {
-        glez::draw::rect(x, y, size.first, size.second, Transparent(this->GetCanvas()->GetColor(), 0.32f));
+        canvas->Rect({ zero, size }, Transparent(this->GetCanvas()->GetColor(), 0.32f));
     }
 }
 

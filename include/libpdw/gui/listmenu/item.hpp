@@ -35,7 +35,7 @@ public:
 
     Item(std::string name = "ncc_menu_item");
 
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void HandleCustomEvent(std::string_view event) override;
 };
 

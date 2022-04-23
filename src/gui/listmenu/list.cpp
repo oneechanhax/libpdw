@@ -230,11 +230,11 @@ void List::OnMouseLeave() {
     }
 }
 
-void List::Draw(int x, int y) {
+void List::Draw(ICanvas* canvas) {
     // const auto& size = GetSize();
-    glez::draw::rect_outline(x, y, 2 + Item::size_x, this->items * Item::size_y + 2, this->GetCanvas()->GetColor(), 1);
+    canvas->Rect({ { 0, 0 }, { 2 + Item::size_x, this->items * Item::size_y + 2 } }, this->GetCanvas()->GetColor(), CanvasLayer::RectType::Outline);
     for (int i = 1; i < this->items; i++) {
-        glez::draw::line(x + 1, y + Item::size_y * i, Item::size_x, 0, this->GetCanvas()->GetColor(), 1);
+        canvas->Line({ { 1, Item::size_y * i }, { Item::size_x, 0 } }, this->GetCanvas()->GetColor());
     }
     // CBaseContainer::Draw(x, y);
     for (int i = 0; i < ChildCount(); i++) {
@@ -245,11 +245,13 @@ void List::Draw(int x, int y) {
             throw std::runtime_error("Invalid cast in NCC-List:Draw!");
         }
         const auto& offset = item->GetOffset();
-        item->Draw(x + offset.first, y + offset.second);
+        CanvasOffset offsetted_canvas(canvas, offset);
+        item->Draw(&offsetted_canvas);
     }
     if (dynamic_cast<List*>(open_sublist)) {
         const auto& offset = open_sublist->GetOffset();
-        open_sublist->Draw(x + offset.first, y + offset.second);
+        CanvasOffset offsetted_canvas(canvas, offset);
+        open_sublist->Draw(&offsetted_canvas);
     }
 }
 

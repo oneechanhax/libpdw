@@ -38,7 +38,7 @@ public:
     void SetCallback(SliderCallbackFn_t callback);
 
     virtual void Update();
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
 
     SliderCallbackFn_t m_pCallback;
 

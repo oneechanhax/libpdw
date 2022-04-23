@@ -34,7 +34,7 @@ public:
     void SetAutoSize(bool autosize);
     void SetCentered(bool centered);
 
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
 
 private:
     bool autosize;

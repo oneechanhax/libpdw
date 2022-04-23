@@ -90,14 +90,14 @@ void CSlider::Update() {
         m_bDragInit = false;
 }
 
-void CSlider::Draw(int x, int y) {
+void CSlider::Draw(ICanvas* canvas) {
     auto size = GetSize();
-    glez::draw::rect(x, y, size.first, size.second, glez::color::black);
-    glez::draw::rect(x, y, m_nSliderPos, size.second, this->GetCanvas()->GetColor());
+    canvas->Rect({ { 0, 0 }, size }, glez::color::black);
+    canvas->Rect({ { 0, 0 }, { m_nSliderPos, size.second } }, this->GetCanvas()->GetColor());
     char s[256];
     snprintf(s, sizeof(s), "%.2f", Value());
     std::string str(s);
     std::pair<float, float> sl;
     this->GetCanvas()->GetFont().stringSize(str, &sl.first, &sl.second);
-    glez::draw::string(x + (size.first - sl.first) / 2, y + (size.second - sl.second) / 2, str, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+    canvas->String({ (size.first - sl.first) / 2, (size.second - sl.second) / 2 }, str, glez::color::white);
 }

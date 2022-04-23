@@ -55,16 +55,16 @@ std::string CDropdown::ValueName(int idx) {
     return m_values.at(idx);
 }
 
-void CDropdown::Draw(int x, int y) {
+void CDropdown::Draw(ICanvas* canvas) {
     auto size = GetSize();
     std::pair<float, float> ssize;
     this->GetCanvas()->GetFont().stringSize(ValueName(Value() - this->offset), &ssize.first, &ssize.second);
-    glez::draw::rect(x, y, size.first, size.second, Transparent(glez::color::black));
-    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
-    glez::draw::string(x + (size.first - ssize.first) / 2, y + (size.second - ssize.second) / 2, ValueName(Value() - this->offset), this->GetCanvas()->GetFont(), this->GetCanvas()->GetColor(), nullptr, nullptr);
+    canvas->Rect({ { 0, 0 }, { size } }, Transparent(glez::color::black));
+    canvas->Rect({ { 0, 0 }, { size } }, this->GetCanvas()->GetColor(), CanvasLayer::RectType::Outline);
+    canvas->String({ (size.first - ssize.first) / 2, (size.second - ssize.second) / 2 }, ValueName(Value() - this->offset), this->GetCanvas()->GetColor());
     std::pair<float, float> asize;
     this->GetCanvas()->GetFont().stringSize(">", &asize.first, &asize.second);
-    glez::draw::string(x + size.first - asize.first - 2, y + (size.second - asize.second) / 2, ">", this->GetCanvas()->GetFont(), this->GetCanvas()->GetColor(), nullptr, nullptr);
+    canvas->String({ size.first - asize.first - 2, (size.second - asize.second) / 2 }, ">", this->GetCanvas()->GetColor());
 }
 
 void CDropdown::OnFocusLose() {

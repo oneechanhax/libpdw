@@ -28,7 +28,7 @@ class CTitleBar : public CBaseWidget {
 public:
     CTitleBar(IWidget* parent, std::string title);
 
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
     virtual void OnMouseMove(std::pair<int, int>);
     virtual void Update();
 

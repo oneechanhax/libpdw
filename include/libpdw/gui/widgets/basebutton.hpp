@@ -36,7 +36,7 @@ public:
     CBaseButton(std::string name = "unnamed", IWidget* parent = nullptr, std::string text = "", ButtonCallbackFn_t callback = nullptr)
         : CBaseButton(parent, name, text, callback) { }
 
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
     virtual void OnMousePress() override;
 
     void SetCallback(ButtonCallbackFn_t callback);

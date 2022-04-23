@@ -89,7 +89,7 @@ Background::~Background() {
     }
 }
 
-void Background::Draw(int x, int y) {
+void Background::Draw(ICanvas* canvas) {
     if (!particles)
         return;
     Particle* current = list;

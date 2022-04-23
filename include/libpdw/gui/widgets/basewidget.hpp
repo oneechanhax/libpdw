@@ -34,7 +34,7 @@ public:
     CBaseWidget(std::string name = "unnamed", IWidget* parent = nullptr);
 
     virtual void Update();
-    inline virtual void Draw(int x, int y) {};
+    virtual void Draw(ICanvas*) { }
     virtual void DrawBounds(int x, int y);
 
     inline virtual KeyValues* Props() const {

@@ -77,16 +77,17 @@ int CBaseContainer::ChildCount() {
     return m_children.size();
 }
 
-void CBaseContainer::Draw(int x, int y) {
+void CBaseContainer::Draw(ICanvas* canvas) {
     for (auto child : m_children) {
         if (child->IsVisible()) {
             auto off = child->GetOffset();
-            if (AlwaysVisible() || this->GetCanvas()->IsVisible() || child->AlwaysVisible())
-                child->Draw(x + off.first, y + off.second);
+            if (AlwaysVisible() || this->GetCanvas()->IsVisible() || child->AlwaysVisible()) {
+                CanvasOffset offsetted_canvas(canvas, off);
+                child->Draw(&offsetted_canvas);
+            }
         }
     }
 }
-
 void CBaseContainer::DrawBounds(int x, int y) {
     for (auto child : m_children) {
         if (child->IsVisible()) {

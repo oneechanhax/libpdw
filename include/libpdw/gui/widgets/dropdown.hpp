@@ -43,7 +43,7 @@ public:
     void ShowList();
     void SetCallback(DropdownCallbackFn_t callback);
 
-    virtual void Draw(int x, int y);
+    virtual void Draw(ICanvas*);
     virtual void OnFocusLose();
 
     DropdownCallbackFn_t m_pDropdownCallback;

@@ -38,7 +38,7 @@ public:
     virtual void OnMousePress() override;
     virtual void OnFocusLose() override;
     virtual void OnKeyPress(CatKey key, bool repeat) override;
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
 
 public:
     ui::BaseVar& catvar;

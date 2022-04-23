@@ -33,14 +33,14 @@ ItemTitle::ItemTitle(std::string title)
     this->brackets = false;
 }
 
-void ItemTitle::Draw(int x, int y) {
-    Item::Draw(x, y);
+void ItemTitle::Draw(ICanvas* canvas) {
+    Item::Draw(canvas);
     // nailed it
     bool brackets3 = this->brackets;
     std::string str = (brackets3 ? ">>> " : ">> ") + title + (brackets3 ? " <<<" : " <<");
     std::pair<float, float> size;
     this->GetCanvas()->GetFont().stringSize(str, &size.first, &size.second);
-    glez::draw::string(x + ((Item::size_x - size.first) / 2), y, str, this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+    canvas->String({ ((Item::size_x - size.first) / 2), 0 }, str, glez::color::white);
 }
 
 }

@@ -50,10 +50,11 @@ void Tooltip::HandleCustomEvent(std::string_view event) {
     }*/
 }
 
-void Tooltip::Draw(int x, int y) {
+void Tooltip::Draw(ICanvas* canvas) {
     const auto& size = GetSize();
-    int originx = x;
-    int originy = y;
+    auto offset = this->GetOffset();
+    int originx = offset.first;
+    int originy = offset.second;
     auto root_size = this->GetCanvas()->GetSize();
     if (originx + size.first > root_size.first)
         originx -= size.first;
@@ -61,9 +62,9 @@ void Tooltip::Draw(int x, int y) {
         originy -= size.second;
     static auto bgcolor = glez::rgba(0, 0, 0, 77); // colors::Create(70, 86, 47, 28);
     static auto fgcolor = glez::rgba(200, 200, 190, 255);
-    glez::draw::rect(x, y, size.first, size.second, bgcolor);
-    glez::draw::rect_outline(x, y, size.first, size.second, this->GetCanvas()->GetColor(), 1);
-    glez::draw::string(x + this->padding.first, y + this->padding.second, GetText(), this->GetCanvas()->GetFont(), fgcolor, nullptr, nullptr);
+    canvas->Rect({ { 0, 0 }, size }, bgcolor);
+    canvas->Rect({ { 0, 0 }, size }, this->GetCanvas()->GetColor(), CanvasLayer::RectType::Outline);
+    canvas->String(this->padding, GetText(), fgcolor);
 }
 
 }

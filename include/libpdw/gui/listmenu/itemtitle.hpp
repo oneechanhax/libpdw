@@ -29,7 +29,7 @@ class ItemTitle : public Item {
 public:
     ItemTitle(std::string title);
 
-    virtual void Draw(int x, int y) override;
+    virtual void Draw(ICanvas*) override;
 
 public:
     const std::string title;

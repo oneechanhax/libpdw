@@ -114,8 +114,8 @@ void ItemVariable::OnKeyPress(CatKey key, bool repeat) {
     }
 }
 
-void ItemVariable::Draw(int x, int y) {
-    Item::Draw(x, y);
+void ItemVariable::Draw(ICanvas* canvas) {
+    Item::Draw(canvas);
     std::string val = "[UNDEFINED]";
     switch (catvar.type) {
     case ui::BaseVar::Type::kBool:
@@ -137,7 +137,7 @@ void ItemVariable::Draw(int x, int y) {
         }
     } break;
     }
-    glez::draw::string(x + 2, y, (std::string(catvar.gui_name) + ": " + val), this->GetCanvas()->GetFont(), glez::color::white, nullptr, nullptr);
+    canvas->String({ 2, 0 }, (std::string(catvar.gui_name) + ": " + val), glez::color::white);
 }
 
 }
