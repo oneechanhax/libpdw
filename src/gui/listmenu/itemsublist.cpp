@@ -41,7 +41,7 @@ void ItemSublist::SetParent(IWidget* widget) {
     listp->AddChild(list);
 }
 
-bool ItemSublist::IsHovered() {
+bool ItemSublist::IsHovered() const {
     List* parent = dynamic_cast<List*>(GetParent());
     if (!parent)
         throw std::runtime_error("Sublist parent can't be casted to List!");

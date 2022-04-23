@@ -35,7 +35,7 @@ Logo::Logo(IWidget* parent)
     SetSize(576, 288);
 }
 
-bool Logo::AlwaysVisible() {
+bool Logo::AlwaysVisible() const {
     return (int)logo == 2;
 }
 

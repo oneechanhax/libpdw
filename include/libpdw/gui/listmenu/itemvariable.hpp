@@ -34,7 +34,7 @@ public:
     void Change(float amount);
 
     virtual void Update() override;
-    virtual bool ConsumesKey(CatKey key) override;
+    virtual bool ConsumesKey(CatKey key) const override;
     virtual void OnMousePress() override;
     virtual void OnFocusLose() override;
     virtual void OnKeyPress(CatKey key, bool repeat) override;

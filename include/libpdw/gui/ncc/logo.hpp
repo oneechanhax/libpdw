@@ -28,7 +28,7 @@ namespace ncc {
 class Logo : public CBaseWidget {
 public:
     Logo(IWidget*);
-    virtual bool AlwaysVisible() override;
+    virtual bool AlwaysVisible() const override;
     virtual void Draw(int x, int y) override;
     virtual void OnMouseMove(std::pair<int, int>) override;
     glez::texture texture;

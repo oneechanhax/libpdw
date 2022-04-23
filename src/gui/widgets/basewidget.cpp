@@ -33,15 +33,15 @@ void CBaseWidget::DrawBounds(int x, int y) {
     glez::draw::rect_outline(x, y, size.first, size.second, *this->bounds_color, 1);
 }
 
-bool CBaseWidget::IsHovered() {
+bool CBaseWidget::IsHovered() const {
     return this->GetCanvas()->IsVisible() && this->hover;
 }
 
-bool CBaseWidget::IsFocused() {
+bool CBaseWidget::IsFocused() const {
     return this->GetCanvas()->IsVisible() && this->focus;
 }
 
-bool CBaseWidget::IsPressed() {
+bool CBaseWidget::IsPressed() const {
     return this->GetCanvas()->IsVisible() && this->press;
 }
 
@@ -66,7 +66,7 @@ void CBaseWidget::Update() {
     }
 }
 
-std::pair<int, int> CBaseWidget::AbsolutePosition() {
+std::pair<int, int> CBaseWidget::AbsolutePosition() const {
     auto result = GetOffset();
     auto parent = GetParent();
     while (parent) {
@@ -78,8 +78,17 @@ std::pair<int, int> CBaseWidget::AbsolutePosition() {
     return result;
 }
 
-bool CBaseWidget::IsVisible() {
+bool CBaseWidget::IsVisible() const {
     return this->visible && (!this->GetParent() || GetParent()->IsVisible());
+}
+
+const Canvas* CBaseWidget::GetCanvas() const {
+    auto* ret = dynamic_cast<const Canvas*>(this);
+    if (ret)
+        return ret;
+    ret = this->GetParent()->GetCanvas();
+    assert(ret);
+    return ret;
 }
 
 Canvas* CBaseWidget::GetCanvas() {

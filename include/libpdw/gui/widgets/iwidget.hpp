@@ -42,7 +42,7 @@ public:
     virtual void Draw(int x, int y) = 0;
     virtual void DrawBounds(int x, int y) = 0;
 
-    virtual KeyValues* Props() = 0;
+    virtual KeyValues* Props() const = 0;
 
     virtual void OnMouseEnter() = 0;
     virtual void OnMouseLeave() = 0;
@@ -56,36 +56,37 @@ public:
 
     virtual void HandleCustomEvent(std::string_view event) = 0;
 
-    virtual bool ConsumesKey(CatKey key) = 0;
+    virtual bool ConsumesKey(CatKey key) const = 0;
 
     // Widget will be visible even when gui is turned off
-    virtual bool AlwaysVisible() = 0;
+    virtual bool AlwaysVisible() const = 0;
     virtual void Show() = 0;
     virtual void Hide() = 0;
-    virtual bool IsVisible() = 0;
+    virtual bool IsVisible() const = 0;
 
-    virtual bool IsHovered() = 0;
-    virtual bool IsFocused() = 0;
-    virtual bool IsPressed() = 0;
+    virtual bool IsHovered() const = 0;
+    virtual bool IsFocused() const = 0;
+    virtual bool IsPressed() const = 0;
 
-    virtual bool DoesStealFocus() = 0;
+    virtual bool DoesStealFocus() const = 0;
 
     virtual void SetOffset(int x, int y) = 0;
     virtual void SetMaxSize(int x, int y) = 0;
     virtual void SetSize(int x, int y) = 0;
-    virtual std::pair<int, int> GetOffset() = 0;
-    virtual std::pair<int, int> GetSize() = 0;
-    virtual std::pair<int, int> GetMaxSize() = 0;
-    virtual int GetZIndex() = 0;
+    virtual std::pair<int, int> GetOffset() const = 0;
+    virtual std::pair<int, int> GetSize() const = 0;
+    virtual std::pair<int, int> GetMaxSize() const = 0;
+    virtual int GetZIndex() const = 0;
     virtual void SetZIndex(int idx) = 0;
 
-    virtual std::string GetTooltip() = 0;
+    virtual std::string GetTooltip() const = 0;
 
-    virtual PositionMode GetPositionMode() = 0;
+    virtual PositionMode GetPositionMode() const = 0;
     virtual void SetPositionMode(PositionMode) = 0;
 
-    virtual IWidget* GetParent() = 0;
+    virtual IWidget* GetParent() const = 0;
     virtual void SetParent(IWidget*) = 0;
-    virtual std::string GetName() = 0;
+    virtual std::string GetName() const = 0;
+    virtual const Canvas* GetCanvas() const = 0;
     virtual Canvas* GetCanvas() = 0;
 };

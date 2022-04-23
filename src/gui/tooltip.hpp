@@ -30,7 +30,7 @@ public:
 
     virtual void Draw(int x, int y) override;
     virtual void HandleCustomEvent(std::string_view event) override;
-    inline virtual PositionMode GetPositionMode() override { return PositionMode::FLOATING; }
+    inline virtual PositionMode GetPositionMode() const override { return PositionMode::FLOATING; }
     std::pair<int, int> padding;
 };
 

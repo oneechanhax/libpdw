@@ -41,7 +41,7 @@ public:
     virtual void Draw(int x, int y) override;
     virtual void OnMousePress() override;
     virtual void OnFocusLose() override;
-    virtual bool ConsumesKey(CatKey key) override;
+    virtual bool ConsumesKey(CatKey key) const override;
     bool capturing;
     int value;
 };

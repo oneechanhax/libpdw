@@ -24,7 +24,7 @@
 
 #include "gui/canvas.hpp"
 
-static std::string WordWrap(std::string& in, int max, glez::font& font) {
+static std::string WordWrap(std::string& in, int max, const glez::font& font) {
     std::stringstream result, line, wordstream, next;
     std::string word;
     char ch;

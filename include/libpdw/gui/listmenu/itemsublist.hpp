@@ -33,7 +33,7 @@ public:
     ItemSublist(std::string title, List* list);
 
     virtual void SetParent(IWidget*) override;
-    virtual bool IsHovered() override;
+    virtual bool IsHovered() const override;
     virtual void Update() override;
     virtual void Draw(int x, int y) override;
     virtual void OnKeyPress(CatKey code, bool repeated) override;

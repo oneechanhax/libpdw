@@ -37,7 +37,7 @@ public:
     inline virtual void Draw(int x, int y) {};
     virtual void DrawBounds(int x, int y);
 
-    inline virtual KeyValues* Props() {
+    inline virtual KeyValues* Props() const {
         return m_KeyValues;
     }
 
@@ -53,19 +53,19 @@ public:
 
     inline virtual void HandleCustomEvent(std::string_view event) {};
 
-    inline virtual bool ConsumesKey(CatKey key) { return false; }
+    inline virtual bool ConsumesKey(CatKey key) const { return false; }
 
-    inline virtual bool AlwaysVisible() { return this->always_visible; }
+    inline virtual bool AlwaysVisible() const { return this->always_visible; }
 
     inline virtual void Show() { this->visible = true; }
     inline virtual void Hide() { this->visible = false; }
-    virtual bool IsVisible();
+    virtual bool IsVisible() const;
 
-    virtual bool IsHovered();
-    virtual bool IsFocused();
-    virtual bool IsPressed();
+    virtual bool IsHovered() const;
+    virtual bool IsFocused() const;
+    virtual bool IsPressed() const;
 
-    inline virtual bool DoesStealFocus() { return true; }
+    inline virtual bool DoesStealFocus() const { return true; }
 
     inline virtual void SetOffset(int x, int y) {
         if (x >= 0)
@@ -79,28 +79,29 @@ public:
         if (y >= 0)
             this->max_size.second = y;
     }
-    inline virtual std::pair<int, int> GetOffset() {
+    inline virtual std::pair<int, int> GetOffset() const {
         return this->offset;
     }
-    inline virtual std::pair<int, int> GetSize() {
+    inline virtual std::pair<int, int> GetSize() const {
         return this->size;
     }
-    inline virtual std::pair<int, int> GetMaxSize() {
+    inline virtual std::pair<int, int> GetMaxSize() const {
         return this->max_size;
     }
-    inline virtual int GetZIndex() { return this->zindex; }
+    inline virtual int GetZIndex() const { return this->zindex; }
     inline virtual void SetZIndex(int idx) { this->zindex = idx; }
 
-    inline virtual std::string GetTooltip() { return this->tooltip; }
+    inline virtual std::string GetTooltip() const { return this->tooltip; }
 
-    inline virtual PositionMode GetPositionMode() { return this->positionmode; }
+    inline virtual PositionMode GetPositionMode() const { return this->positionmode; }
     inline virtual void SetPositionMode(PositionMode mode) { this->positionmode = mode; };
 
-    inline virtual IWidget* GetParent() { return m_pParent; }
+    inline virtual IWidget* GetParent() const { return m_pParent; }
     inline virtual void SetParent(IWidget* parent) { m_pParent = parent; }
-    inline virtual std::string GetName() { return this->name; }
+    inline virtual std::string GetName() const { return this->name; }
+    virtual const Canvas* GetCanvas() const;
     virtual Canvas* GetCanvas();
-    std::pair<int, int> AbsolutePosition();
+    std::pair<int, int> AbsolutePosition() const;
     inline void SetSize(int x, int y) {
         if (x >= 0)
             this->size.first = x;

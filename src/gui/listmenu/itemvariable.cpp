@@ -60,7 +60,7 @@ void ItemVariable::Change(float amount) {
     }
 }
 
-bool ItemVariable::ConsumesKey(CatKey key) {
+bool ItemVariable::ConsumesKey(CatKey key) const {
     if (capturing)
         return true;
     if (key == CatKey::CATKEY_M_WHEEL_DOWN || key == CatKey::CATKEY_M_WHEEL_UP || key == CatKey::CATKEY_MOUSE_1)

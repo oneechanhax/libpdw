@@ -41,7 +41,7 @@ public:
 public:
     Background();
     ~Background();
-    virtual bool AlwaysVisible() override;
+    virtual bool AlwaysVisible() const override;
     virtual void Draw(int x, int y) override;
     virtual void Update() override;
     void MakeParticle();

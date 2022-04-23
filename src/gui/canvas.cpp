@@ -222,10 +222,10 @@ static glez::rgba RainbowCurrent() {
     return FromHSL(fabs(sin(ctime.count())) * 360.0f, 0.85f, 0.9f);
 }
 
-glez::rgba Canvas::GetColor() {
+glez::rgba Canvas::GetColor() const {
     return gui_rainbow ? RainbowCurrent() : gui_color;
 }
-glez::font& Canvas::GetFont() {
+const glez::font& Canvas::GetFont() const {
     return this->font;
 }
 void Canvas::OnKeyPress(CatKey key, bool repeat) {

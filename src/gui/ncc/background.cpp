@@ -55,7 +55,7 @@ Background::Background()
     this->zindex = -999;
 }
 
-bool Background::AlwaysVisible() {
+bool Background::AlwaysVisible() const {
     return (int)particles == 2;
 }
 

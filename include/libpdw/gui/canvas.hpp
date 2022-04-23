@@ -44,11 +44,11 @@ public:
     [[deprecated]] int mouse_dy;
     bool fake_scroll = false;
 
-    glez::rgba GetColor();
+    glez::rgba GetColor() const;
     bool gui_rainbow = true;
     glez::rgba gui_color;
 
-    glez::font& GetFont();
+    const glez::font& GetFont() const;
 
     virtual void Update() override;
     virtual void OnKeyPress(CatKey key, bool repeat) override;

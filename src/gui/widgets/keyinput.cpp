@@ -72,7 +72,7 @@ void CKeyInput::OnFocusLose() {
     this->capturing = false;
 }
 
-bool CKeyInput::ConsumesKey(CatKey key) {
+bool CKeyInput::ConsumesKey(CatKey key) const {
     return key != CatKey::CATKEY_MOUSE_1 && this->capturing;
 }
 
