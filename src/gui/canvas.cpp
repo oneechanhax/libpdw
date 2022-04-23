@@ -152,8 +152,12 @@ void Canvas::Update() {
 
     auto nmouse = input::GetMouse();
 
-    mouse_dx = nmouse.first - m_iMouseX;
-    mouse_dy = nmouse.second - m_iMouseY;
+    {
+        auto mouse_delta = std::make_pair(nmouse.first - m_iMouseX, nmouse.second - m_iMouseY);
+        mouse_dx = mouse_delta.first, mouse_dy = mouse_delta.second;
+        if (mouse_delta.first || mouse_delta.second)
+            this->OnMouseMove(mouse_delta);
+    }
 
     m_iMouseX = nmouse.first;
     m_iMouseY = nmouse.second;

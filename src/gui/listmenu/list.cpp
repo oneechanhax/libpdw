@@ -267,12 +267,15 @@ void List::SetParent(IWidget* parent) {
         root_list = this;
 }
 
-void List::Update() {
-    CBaseContainer::Update();
+void List::OnMouseMove(std::pair<int, int> delta) {
     if (IsPressed() && root_list == this) {
         const auto& offset = root_list->GetOffset();
-        root_list->SetOffset(offset.first + this->GetCanvas()->mouse_dx, offset.second + this->GetCanvas()->mouse_dy);
+        root_list->SetOffset(offset.first + delta.first, offset.second + delta.second);
     }
+}
+
+void List::Update() {
+    CBaseContainer::Update();
 }
 
 void List::MoveChildren() {

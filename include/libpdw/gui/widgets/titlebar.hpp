@@ -29,10 +29,8 @@ public:
     CTitleBar(IWidget* parent, std::string title);
 
     virtual void Draw(int x, int y);
+    virtual void OnMouseMove(std::pair<int, int>);
     virtual void Update();
 
     std::string m_strTitle;
-    int m_iDraggingStage;
-    int m_nLastX;
-    int m_nLastY;
 };

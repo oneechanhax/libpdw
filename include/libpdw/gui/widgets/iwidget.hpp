@@ -48,6 +48,7 @@ public:
     virtual void OnMouseLeave() = 0;
     virtual void OnMousePress() = 0;
     virtual void OnMouseRelease() = 0;
+    virtual void OnMouseMove(std::pair<int, int>) = 0;
     virtual void OnKeyPress(CatKey key, bool repeat) = 0;
     virtual void OnKeyRelease(CatKey key) = 0;
     virtual void OnFocusGain() = 0;

@@ -52,6 +52,7 @@ public:
     virtual void OnKeyPress(CatKey key, bool repeat) override;
     virtual void OnMouseEnter() override;
     virtual void OnMouseLeave() override;
+    virtual void OnMouseMove(std::pair<int, int>) override;
     virtual void Draw(int x, int y) override;
     virtual void Update() override;
     virtual void MoveChildren() override;

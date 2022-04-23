@@ -44,11 +44,11 @@ void Logo::Draw(int x, int y) {
         glez::draw::rect_textured(x, y, embeded_logo_png_rgba.width, embeded_logo_png_rgba.height, this->GetCanvas()->GetColor(), this->texture, 0, 0, embeded_logo_png_rgba.width, embeded_logo_png_rgba.height, 0.0f);
 }
 
-void Logo::Update() {
+void Logo::OnMouseMove(std::pair<int, int> delta) {
     if (this->IsPressed()) {
         auto offset = GetOffset();
-        offset.first += this->GetCanvas()->mouse_dx;
-        offset.second += this->GetCanvas()->mouse_dy;
+        offset.first += delta.first;
+        offset.second += delta.second;
         SetOffset(offset.first, offset.second);
     }
 }

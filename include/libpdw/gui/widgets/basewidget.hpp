@@ -45,6 +45,7 @@ public:
     inline virtual void OnMouseLeave() { this->hover = false; }
     inline virtual void OnMousePress() { this->press = true; }
     inline virtual void OnMouseRelease() { this->press = false; }
+    inline virtual void OnMouseMove(std::pair<int, int>) { }
     inline virtual void OnKeyPress(CatKey key, bool repeat) {};
     inline virtual void OnKeyRelease(CatKey key) {};
     inline virtual void OnFocusGain() { this->focus = true; }

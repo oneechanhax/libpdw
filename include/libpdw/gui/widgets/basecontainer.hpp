@@ -49,6 +49,7 @@ public:
     virtual void OnMouseLeave();
     virtual void OnMousePress();
     virtual void OnMouseRelease();
+    virtual void OnMouseMove(std::pair<int, int>);
     virtual void Update();
     virtual void HandleCustomEvent(std::string_view event);
 

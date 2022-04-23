@@ -185,6 +185,12 @@ void CBaseContainer::OnMouseRelease() {
         GetPressedChild()->OnMouseRelease();
 }
 
+void CBaseContainer::OnMouseMove(std::pair<int, int> delta) {
+    CBaseWidget::OnMouseMove(delta);
+    for (auto* i : this->m_children)
+        i->OnMouseMove(delta);
+}
+
 void CBaseContainer::PressOn(IWidget* child) {
     m_pPressedChild = child;
     if (child) {

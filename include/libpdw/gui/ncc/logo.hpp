@@ -30,7 +30,7 @@ public:
     Logo(IWidget*);
     virtual bool AlwaysVisible() override;
     virtual void Draw(int x, int y) override;
-    virtual void Update() override;
+    virtual void OnMouseMove(std::pair<int, int>) override;
     glez::texture texture;
 };
 

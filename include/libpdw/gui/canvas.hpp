@@ -40,8 +40,8 @@ public:
     bool m_bKeysInit = false;
     int m_iMouseX;
     int m_iMouseY;
-    int mouse_dx;
-    int mouse_dy;
+    [[deprecated]] int mouse_dx;
+    [[deprecated]] int mouse_dy;
     bool fake_scroll = false;
 
     glez::rgba GetColor();
